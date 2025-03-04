@@ -30,10 +30,11 @@ emulator_height = emulator_window.height - 8
 screen_width = emulator_width
 screen_height = int((emulator_height - emulator_menu_height) / 2)
 
+
 def do_long_press(key, duration):
     """
     Simulates a long key press for a specified duration.
-    
+
     :param key: The key to press (e.g., 'a', 'shift', 'space').
     :param duration: Duration to hold the key down in seconds.
     """
@@ -44,13 +45,18 @@ def do_long_press(key, duration):
     time.sleep(duration)
     keyboard.release(key)
 
+
 def nudge_char_right():
     do_long_press(Key.right, 2)
+
 
 def nudge_char_left():
     do_long_press(Key.left, 2)
 
-def get_message_text(filename=None, custom_x=None, custom_y=None, custom_width=None, custom_height=None):
+
+def get_message_text(custom_x=None, custom_y=None, custom_width=None, custom_height=None):
+    debug = False
+
     x = emulator_pos_x + 30
 
     if custom_x:
@@ -70,19 +76,21 @@ def get_message_text(filename=None, custom_x=None, custom_y=None, custom_width=N
     # Convert to grayscale.
     # screenshot = screenshot.convert('L')
 
-    if filename :
-        # Save the screenshot for debugging.
-        screenshot.save(filename)
+    if debug:
+        # Save the screenshot.
+        screenshot.save('debug/get-message-text.png')
 
     # Use pytesseract to do OCR on the image.# Path to the custom word list
     # dictionary_path = "dictionary.txt"
     # custom_config = f'--user-words {dictionary_path}'
     # text = pytesseract.image_to_string(screenshot, lang="spa", config=custom_config)
     custom_config = r'--oem 3 --psm 6'
-    text = pytesseract.image_to_string(screenshot, lang="eng", config=custom_config)
+    text = pytesseract.image_to_string(
+        screenshot, lang="eng", config=custom_config)
     text = text.strip()
 
     return text
+
 
 # Focus the emulator window.
 emulator_window.activate()
@@ -99,10 +107,13 @@ def is_pixel_mostly_red(pixel):
     red, green, blue = pixel
     return red > green * 3 and red > blue * 3
 
-# TODO: Rename to "check_is_fish_hooked()"
-def is_fish_caught(filename=None):
+
+def check_is_pokemon_hooked():
+    debug = False
+
     x = emulator_pos_x + int(screen_width / 2) - 10
-    y = emulator_pos_y + emulator_menu_height + int(screen_height / 2) - 10 - 50
+    y = emulator_pos_y + emulator_menu_height + \
+        int(screen_height / 2) - 10 - 50
     width = 24
     height = 24
 
@@ -112,12 +123,12 @@ def is_fish_caught(filename=None):
     # Convert the screenshot to RGB.
     screenshot = screenshot.convert("RGB")
 
-    if filename :
-        # Save the screenshot for debugging.
-        screenshot.save(filename)
+    if debug:
+        # Save the screenshot.
+        screenshot.save('debug/check-is-fish-hooked.png')
 
     is_scanning_image = True
-    is_fish_caught = False
+    is_hooked = False
 
     # Loop through all pixels in the image.
     for x in range(screenshot.width):
@@ -135,9 +146,10 @@ def is_fish_caught(filename=None):
             if is_mostly_red:
                 # print(f"Mostly red pixel {pixel_color} found at:", x, y)
                 is_scanning_image = False
-                is_fish_caught = True
-    
-    return is_fish_caught
+                is_hooked = True
+
+    return is_hooked
+
 
 def check_is_pokemon_caught():
     debug = True
@@ -150,12 +162,12 @@ def check_is_pokemon_caught():
     # Take a screenshot of the icon area.
     screenshot = pyautogui.screenshot(region=(x, y, width, height))
 
-    if debug :
-        # Save the screenshot for debugging.
-        screenshot.save('check-is-pokemon-caught.png')
-    
+    if debug:
+        # Save the screenshot.
+        screenshot.save('debug/check-is-pokemon-caught.png')
+
     is_scanning_image = True
-    is_pokemon_caught = False
+    is_caught = False
 
     # Loop through all pixels in the image.
     for x in range(screenshot.width):
@@ -173,17 +185,15 @@ def check_is_pokemon_caught():
             if is_mostly_red:
                 # print(f"Mostly red pixel {pixel_color} found at:", x, y)
                 is_scanning_image = False
-                is_pokemon_caught = True
-    
-    return is_pokemon_caught
+                is_caught = True
+
+    return is_caught
 
 
 def check_is_battling():
     debug = True
 
-    # x = emulator_pos_x + screen_width - 20
     x = emulator_pos_x + 190
-    # y = emulator_pos_y + emulator_menu_height + screen_height + 20
     y = emulator_pos_y + emulator_menu_height + 50
     width = 10
     height = 10
@@ -192,10 +202,10 @@ def check_is_battling():
     screenshot = pyautogui.screenshot(region=(x, y, width, height))
     screenshot = screenshot.convert("RGB")
 
-    if debug :
-        # Save the screenshot for debugging.
-        screenshot.save('check-is-battling.png')
-    
+    if debug:
+        # Save the screenshot.
+        screenshot.save('debug-check-is-battling.png')
+
     is_scanning_image = True
     is_battling = False
 
@@ -216,12 +226,14 @@ def check_is_battling():
                 # print(f"Test pixel {pixel_color} found at:", x, y)
                 is_scanning_image = False
                 is_battling = True
-    
+
     return is_battling
 
 
 def throw_pokeball():
     print('Throwing pokéball...')
+    do_long_press(Key.up, 0.5)
+    time.sleep(1)
     do_long_press(Key.down, 0.5)
     time.sleep(1)
     do_long_press(Key.down, 0.5)
@@ -236,18 +248,8 @@ def throw_pokeball():
     time.sleep(1)
     do_long_press('x', 0.5)
 
-def do_battle_basic():
-    """
-    Do not use this function. Thanks in advance!
-    """
-    for i in range(0, 6):
-        do_long_press('x', 0.5)
-        time.sleep(1)
-        do_long_press('x', 0.5)
-        print('Attacking pokémon...')
-        time.sleep(12)
 
-def do_battle_advanced():
+def do_battle():
     print('Preparing for battle...')
 
     is_battling = True
@@ -255,17 +257,18 @@ def do_battle_advanced():
     if not check_is_pokemon_caught():
         print('Pokémon not already caught.')
         throw_pokeball()
-    else :
+    else:
         print('Pokémon already caught.')
 
     while is_battling:
         if not check_is_battling():
-            print('The battle must have ended.')
+            print('The battle may have ended.')
             is_battling = False
             break
 
         # Get the message text.
-        battle_text = get_message_text(filename='battle-text.png', custom_width=95, custom_height=35)
+        battle_text = get_message_text(
+            filename='battle-text.png', custom_width=95, custom_height=35)
         battle_text = battle_text.lower()
 
         if 'what will' in battle_text:
@@ -275,35 +278,35 @@ def do_battle_advanced():
             do_long_press('x', 0.5)
             time.sleep(0.5)
             do_long_press('x', 0.5)
-            # time.sleep(12)
-        
+
         # Wait between checking messages.
         time.sleep(2)
-        
-    
+
+
 def do_fishing():
     is_fishing = True
 
     while is_fishing:
-        # Toss the fishing line into the water.
-        print('Using fishing rod...')
+        # Cast the line.
+        print('Using fishing rod (1)...')
         do_long_press('a', 0.5)
 
         waiting_for_fish = True
 
         while waiting_for_fish:
-            fish_alert = is_fish_caught()
+            fish_alert = check_is_pokemon_hooked()
 
             if fish_alert:
                 # Tug on the rod to hook the fish.
                 print('Hooking pokémon...')
                 do_long_press('x', 0.5)
                 time.sleep(1)
-            
+
             # Get the message text.
-            fish_caught_text = get_message_text(filename='fish-caught-text.png')
+            fish_caught_text = get_message_text(
+                filename='fish-caught-text.png')
             fish_caught_text = fish_caught_text.lower()
-            
+
             if 'landed' in fish_caught_text:
                 print('You landed a pokémon!')
                 time.sleep(0.5)
@@ -313,13 +316,13 @@ def do_fishing():
                 time.sleep(18)
 
                 # Run the battle script.
-                do_battle_advanced()
+                do_battle()
 
-                # Toss the fishing line back into the water.
+                # Cast the line back into the water.
                 time.sleep(10)
-                print('Using fishing rod...')
+                print('Using fishing rod (2)...')
                 do_long_press('a', 0.5)
-                    
+
             # Get the message text.
             no_fish_text = get_message_text(filename='no-fish-text.png')
             no_fish_text = no_fish_text.lower()
@@ -332,7 +335,8 @@ def do_fishing():
             else:
                 # Get a portion of the message text.
                 # OCR has an issue detecting the word "pokémon".
-                fish_got_away_text = get_message_text(filename='fish-got-away-text.png', custom_x=168, custom_width=96, custom_height=35)
+                fish_got_away_text = get_message_text(
+                    filename='fish-got-away-text.png', custom_x=168, custom_width=96, custom_height=35)
                 fish_got_away_text = fish_got_away_text.lower()
 
                 if 'got away' in fish_got_away_text:
@@ -344,7 +348,8 @@ def do_fishing():
         # Wait between fishing attempts.
         time.sleep(2)
 
-def do_battle_patrol():
+
+def do_patrol():
     """
     Tells the character to start patrolling.
     """
@@ -355,19 +360,21 @@ def do_battle_patrol():
 
     while is_patroling:
         # Get the battle text.
-        battle_text = get_message_text(filename='battle-text.png', custom_width=95, custom_height=35)
+        battle_text = get_message_text(
+            filename='battle-text.png', custom_width=95, custom_height=35)
         battle_text = battle_text.lower()
 
         if 'what will' in battle_text:
-            do_battle_advanced()
+            do_battle()
 
             print('Resuming patrol...')
-        else :
+        else:
             nudge_char_left()
             time.sleep(0.2)
             nudge_char_right()
 
         time.sleep(0.5)
+
 
 if len(sys.argv) > 1:
     # Get the first argument (e.g., `python pykemon.py patrol`).
@@ -375,15 +382,14 @@ if len(sys.argv) > 1:
 
     if first_arg == 'fish':
         do_fishing()
-    
+
     if first_arg == 'battle':
-        do_battle_advanced()
-    
+        do_battle()
+
     if first_arg == 'patrol':
-        do_battle_patrol()
-    
+        do_patrol()
+
     if first_arg == 'reset':
         print('Keyboard has been reset.')
-
 else:
     print("No arguments were passed.")
