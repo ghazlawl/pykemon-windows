@@ -2,7 +2,7 @@
 
 A Python script that automates boring tasks like battling pokémon, catching pokémon, and fishing. For now it only works with [Pokémon Platinum](https://www.nintendolife.com/games/ds/pokemon_platinum) using the [DeSmuME](https://desmume.org/) emulator for Windows.
 
-I don't know why I made this. It took me longer to make this than it would to play the game myself. Anyway, enjoy!
+I don't know why I made this. It took me longer to make than it would to play the game myself. Anyway, enjoy!
 
 ## Images
 
