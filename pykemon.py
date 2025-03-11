@@ -1,10 +1,16 @@
+from fuzzywuzzy import process
 from pynput.keyboard import Controller, Key
-from PIL import ImageGrab
+from PIL import ImageGrab, ImageOps
 
+from imports.emulator import Emulator
+
+import csv
 import pygetwindow as gw
 import pytesseract
 import sys
 import time
+
+# my_emulator = Emulator()
 
 # Get all emulator windows, if present.
 emulator_windows = gw.getWindowsWithTitle('DeSmuME')
@@ -47,6 +53,85 @@ keyboard.release(Key.left)
 keyboard.release(Key.right)
 keyboard.release(Key.up)
 keyboard.release(Key.down)
+
+POKEMON_DB = []
+POKEMON_TYPES = {}
+
+
+def _load_pokemon_db():
+    global POKEMON_DB
+
+    print('Loading Pokémon database...')
+
+    # Open the CSV file.
+    with open('data/pokedex-platinum.csv', mode='r', newline='', encoding='utf-8') as csv_file:
+        # Read the CSV into a dictionary.
+        csv_reader = csv.DictReader(csv_file)
+        
+        # Convert the CSV rows to a list of dictionaries.
+        POKEMON_DB = list(csv_reader)
+
+
+_load_pokemon_db()
+
+
+def _load_pokemon_types():
+    global POKEMON_TYPES
+
+    print('Loading Pokémon types...')
+
+    # Open the CSV file.
+    with open('data/pokemon-types.csv', mode='r', newline='', encoding='utf-8') as csv_file:
+        # Read the CSV into a dictionary.
+        csv_reader = csv.DictReader(csv_file)
+        
+        # Loop through the rows and populate the dictionary.
+        for row in csv_reader:
+            # Extract the type and weaknesses from the row.
+            type = row['Type']
+            weaknesses = [row[f'Weakness {i}'] for i in range(1, 6) if row[f'Weakness {i}']] # Skip empty values
+            
+            # Add the data to the dictionary.
+            POKEMON_TYPES[type] = weaknesses
+
+
+_load_pokemon_types();
+
+
+def _get_pokemon_weaknesses(types):
+    weaknesses = {}
+
+    for pokemon_type in types:
+        if pokemon_type in POKEMON_TYPES:
+            weaknesses[pokemon_type] = POKEMON_TYPES[pokemon_type]
+        
+    return weaknesses
+
+
+def _fuzzy_match_pokemon_name(search_name):
+    # Extract the list of names from the data
+    names = [entry['Name'] for entry in POKEMON_DB]
+
+    # Find the best match
+    best_match = process.extractOne(search_name, names)
+
+    # Get the corresponding data for the best match
+    matched_entry = next(entry for entry in POKEMON_DB if entry['Name'] == best_match[0])
+
+    print('+', '-' * 20, '+')
+    print(f"Searching pokédex for '{search_name}'...")
+    print(f"Name: {matched_entry['Name']}")
+    print(f"Height/Weight: {matched_entry['Height']}, {matched_entry['Weight']} lbs")
+    print(f"Local Index: {matched_entry['Local Index']}")
+    print(f"Types: {", ".join([matched_entry['Type 1'], matched_entry['Type 2']])}")
+
+    weakness_list = _get_pokemon_weaknesses([matched_entry['Type 1'], matched_entry['Type 2']])
+    for type, weaknesses in weakness_list.items():
+        print(f"Weaknesses of {type}: {weaknesses}")
+
+    print('+', '-' * 20, '+')
+
+    return matched_entry
 
 
 def _get_screenshot_bbox(x, y, width, height):
@@ -131,6 +216,44 @@ def _get_ocr_text(screenshot):
     text = pytesseract.image_to_string(
         screenshot, lang="eng", config=custom_config)
     text = text.strip()
+
+    return text
+
+
+def _get_pokemon_name():
+    # Take a screenshot of the leveling area.
+    screenshot = _get_screenshot(
+        0,
+        50,
+        120,
+        26,
+        'get-pokemon-name.png'
+    )
+
+    # Load the image into memory to access pixels
+    pixels = screenshot.load()
+
+    # Get the image size
+    width, height = screenshot.size
+
+    # Define the target color to replace (e.g., RGB: (255, 0, 0) for red)
+    target_color = (109, 117, 93)  # Brown
+    replacement_color = (0, 0, 0)  # Black
+
+    # Iterate through each pixel
+    for x in range(width):
+        for y in range(height):
+            # Check if the current pixel matches the target color
+            if pixels[x, y] == target_color:
+                pixels[x, y] = replacement_color  # Replace with the new color
+
+    # Invert the screenshot for readability.
+    screenshot = ImageOps.invert(screenshot)
+    screenshot.save('screenshots/get-pokemon-name-inverted.png')
+
+    # Extract the text.
+    text = _get_ocr_text(screenshot)
+    text = text.lower()
 
     return text
 
@@ -381,6 +504,7 @@ def check_is_leveling_up():
 
     # Extract the text.
     text = _get_ocr_text(screenshot)
+    text = text.lower()
 
     return 'attack' in text
 
@@ -464,6 +588,9 @@ def do_battle():
     """
 
     print('Preparing for battle...')
+
+    pokemon_name = _get_pokemon_name()
+    _fuzzy_match_pokemon_name(pokemon_name)
 
     is_battling = True
 

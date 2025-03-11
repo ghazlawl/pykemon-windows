@@ -1,0 +1,19 @@
+Type,Weakness 1,Weakness 2,Weakness 3,Weakness 4,Weakness 5
+Bug,Fire,Flying,Rock,,
+Dark,Fighting,Fairy,Bug,,
+Dragon,Ice,Dragon,Fairy,,
+Electric,Ground,,,,
+Fairy,Steel,Poison,,,
+Fighting,Flying,Psychic,Fairy,,
+Fire,Water,Ground,Rock,,
+Flying,Electric,Ice,Rock,,
+Ghost,Ghost,Dark,,,
+Grass,Fire,Ice,Poison,Flying,Bug
+Ground,Water,Ice,Grass,,
+Ice,Fire,Fighting,Rock,Steel,Electric
+Normal,Fighting,,,,
+Poison,Ground,Psychic,,,
+Psychic,Bug,Ghost,Dark,,
+Rock,Water,Grass,Fighting,Ground,Steel
+Steel,Fire,Fighting,Ground,Electric,
+Water,Electric,Grass,,,
