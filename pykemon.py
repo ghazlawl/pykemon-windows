@@ -10,39 +10,14 @@ import pytesseract
 import sys
 import time
 
-# my_emulator = Emulator()
-
-# Get all emulator windows, if present.
-emulator_windows = gw.getWindowsWithTitle('DeSmuME')
-
-if len(emulator_windows) > 0:
-    # Get the first emulator window, if present.
-    emulator_window = emulator_windows[0]
-
-if not emulator_window:
-    print('DeSmuME emulator not running.')
-    quit()
-else:
-    print(f'DeSmuME emulator window found: {emulator_window.title}')
+my_emulator = Emulator()
 
 # Set the tesseract executable location.
 # TODO: Move this to the .env file.
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 # Create the Controller object.
 keyboard = Controller()
-
-# Calculate some runtime variables.
-emulator_menu_height = 80
-emulator_pos_x = emulator_window.left + 6
-emulator_pos_y = emulator_window.top
-emulator_width = emulator_window.width - 12
-emulator_height = emulator_window.height - 8
-screen_width = emulator_width
-screen_height = int((emulator_height - emulator_menu_height) / 2)
-
-# Focus the emulator window.
-emulator_window.activate()
 
 # Give the emulator some time to activate.
 time.sleep(0.2)
@@ -61,13 +36,15 @@ POKEMON_TYPES = {}
 def _load_pokemon_db():
     global POKEMON_DB
 
-    print('Loading Pokémon database...')
+    print("Loading Pokémon database...")
 
     # Open the CSV file.
-    with open('data/pokedex-platinum.csv', mode='r', newline='', encoding='utf-8') as csv_file:
+    with open(
+        "data/pokedex-platinum.csv", mode="r", newline="", encoding="utf-8"
+    ) as csv_file:
         # Read the CSV into a dictionary.
         csv_reader = csv.DictReader(csv_file)
-        
+
         # Convert the CSV rows to a list of dictionaries.
         POKEMON_DB = list(csv_reader)
 
@@ -78,24 +55,28 @@ _load_pokemon_db()
 def _load_pokemon_types():
     global POKEMON_TYPES
 
-    print('Loading Pokémon types...')
+    print("Loading Pokémon types...")
 
     # Open the CSV file.
-    with open('data/pokemon-types.csv', mode='r', newline='', encoding='utf-8') as csv_file:
+    with open(
+        "data/pokemon-types.csv", mode="r", newline="", encoding="utf-8"
+    ) as csv_file:
         # Read the CSV into a dictionary.
         csv_reader = csv.DictReader(csv_file)
-        
+
         # Loop through the rows and populate the dictionary.
         for row in csv_reader:
             # Extract the type and weaknesses from the row.
-            type = row['Type']
-            weaknesses = [row[f'Weakness {i}'] for i in range(1, 6) if row[f'Weakness {i}']] # Skip empty values
-            
+            type = row["Type"]
+            weaknesses = [
+                row[f"Weakness {i}"] for i in range(1, 6) if row[f"Weakness {i}"]
+            ]
+
             # Add the data to the dictionary.
             POKEMON_TYPES[type] = weaknesses
 
 
-_load_pokemon_types();
+_load_pokemon_types()
 
 
 def _get_pokemon_weaknesses(types):
@@ -104,32 +85,36 @@ def _get_pokemon_weaknesses(types):
     for pokemon_type in types:
         if pokemon_type in POKEMON_TYPES:
             weaknesses[pokemon_type] = POKEMON_TYPES[pokemon_type]
-        
+
     return weaknesses
 
 
 def _fuzzy_match_pokemon_name(search_name):
     # Extract the list of names from the data
-    names = [entry['Name'] for entry in POKEMON_DB]
+    names = [entry["Name"] for entry in POKEMON_DB]
 
     # Find the best match
     best_match = process.extractOne(search_name, names)
 
     # Get the corresponding data for the best match
-    matched_entry = next(entry for entry in POKEMON_DB if entry['Name'] == best_match[0])
+    matched_entry = next(
+        entry for entry in POKEMON_DB if entry["Name"] == best_match[0]
+    )
 
-    print('+', '-' * 20, '+')
+    print("+", "-" * 20, "+")
     print(f"Searching pokédex for '{search_name}'...")
     print(f"Name: {matched_entry['Name']}")
     print(f"Height/Weight: {matched_entry['Height']}, {matched_entry['Weight']} lbs")
     print(f"Local Index: {matched_entry['Local Index']}")
-    print(f"Types: {", ".join([matched_entry['Type 1'], matched_entry['Type 2']])}")
+    print(f"Types: {', '.join([matched_entry['Type 1'], matched_entry['Type 2']])}")
 
-    weakness_list = _get_pokemon_weaknesses([matched_entry['Type 1'], matched_entry['Type 2']])
+    weakness_list = _get_pokemon_weaknesses(
+        [matched_entry["Type 1"], matched_entry["Type 2"]]
+    )
     for type, weaknesses in weakness_list.items():
         print(f"Weaknesses of {type}: {weaknesses}")
 
-    print('+', '-' * 20, '+')
+    print("+", "-" * 20, "+")
 
     return matched_entry
 
@@ -153,8 +138,8 @@ def _get_screenshot_bbox(x, y, width, height):
         (100, 100, 300, 200)
     """
 
-    starting_x = emulator_pos_x
-    starting_y = emulator_pos_y + emulator_menu_height
+    starting_x = my_emulator.emulator_position[0]
+    starting_y = my_emulator.emulator_position[1] + my_emulator.emulator_menu_height
 
     x1 = starting_x + x
     y1 = starting_y + y
@@ -188,14 +173,14 @@ def _get_screenshot(x, y, width, height, filename=None):
 
     # Save the screenshot.
     if filename:
-        screenshot.save(f'screenshots/{filename}')
+        screenshot.save(f"pillow/{filename}")
 
     return screenshot
 
 
 def _get_ocr_text(screenshot):
     """
-    Uses the pytesseract library to extract the text from the specified 
+    Uses the pytesseract library to extract the text from the specified
     image. This function mostly reliable but isn't perfect!
 
     Args:
@@ -212,9 +197,8 @@ def _get_ocr_text(screenshot):
     """
 
     # Use pytesseract to do OCR on the image.
-    custom_config = r'--oem 3 --psm 6'
-    text = pytesseract.image_to_string(
-        screenshot, lang="eng", config=custom_config)
+    custom_config = r"--oem 3 --psm 6"
+    text = pytesseract.image_to_string(screenshot, lang="eng", config=custom_config)
     text = text.strip()
 
     return text
@@ -222,13 +206,7 @@ def _get_ocr_text(screenshot):
 
 def _get_pokemon_name():
     # Take a screenshot of the leveling area.
-    screenshot = _get_screenshot(
-        0,
-        50,
-        120,
-        26,
-        'get-pokemon-name.png'
-    )
+    screenshot = _get_screenshot(0, 50, 120, 26, "get-pokemon-name.png")
 
     # Load the image into memory to access pixels
     pixels = screenshot.load()
@@ -249,7 +227,7 @@ def _get_pokemon_name():
 
     # Invert the screenshot for readability.
     screenshot = ImageOps.invert(screenshot)
-    screenshot.save('screenshots/get-pokemon-name-inverted.png')
+    screenshot.save("pillow/get-pokemon-name-inverted.png")
 
     # Extract the text.
     text = _get_ocr_text(screenshot)
@@ -260,7 +238,7 @@ def _get_pokemon_name():
 
 def _is_mostly_red_pixel(pixel):
     """
-    Checks if the specified pixel is mostly red. A pixel is mostly red if the 
+    Checks if the specified pixel is mostly red. A pixel is mostly red if the
     red value is 3x greater or more than the green and blue values.
     """
 
@@ -270,15 +248,15 @@ def _is_mostly_red_pixel(pixel):
 
 def _debug_screen_1():
     """
-    Captures a screenshot of the top screen. Used to confirm x, y, width, 
+    Captures a screenshot of the top screen. Used to confirm x, y, width,
     and height values.
     """
     screenshot = _get_screenshot(
         0,
         0,
-        screen_width,
-        screen_height,
-        'screen-1.png'
+        my_emulator.screen_dimensions[0],
+        my_emulator.screen_dimensions[1],
+        "screen-1.png",
     )
 
     return screenshot
@@ -286,15 +264,15 @@ def _debug_screen_1():
 
 def _debug_screen_2():
     """
-    Captures a screenshot of the bottom screen. Used to confirm x, y, width, 
+    Captures a screenshot of the bottom screen. Used to confirm x, y, width,
     and height values.
     """
     screenshot = _get_screenshot(
         0,
-        screen_height,
-        screen_width,
-        screen_height,
-        'screen-2.png'
+        my_emulator.screen_dimensions[1],
+        my_emulator.screen_dimensions[0],
+        my_emulator.screen_dimensions[1],
+        "screen-2.png",
     )
 
     return screenshot
@@ -332,9 +310,11 @@ def do_walk_left():
     do_long_press(Key.left, 2)
 
 
-def get_message_text(custom_x=None, custom_y=None, custom_width=None, custom_height=None):
+def get_message_text(
+    custom_x=None, custom_y=None, custom_width=None, custom_height=None
+):
     """
-    Gets the text in the message area (e.g., "you landed a pokemon", "not 
+    Gets the text in the message area (e.g., "you landed a pokemon", "not
     even a nibble", etc).
 
     Args:
@@ -349,13 +329,13 @@ def get_message_text(custom_x=None, custom_y=None, custom_width=None, custom_hei
 
     # Calculate the x, y, width, and height.
     x = int(custom_x) if custom_x else 30
-    y_offset = screen_height - 80
+    y_offset = my_emulator.screen_dimensions[1] - 80
     y = y_offset + int(custom_y) if custom_y else y_offset
-    width = custom_width if custom_width else screen_width - 130
+    width = custom_width if custom_width else my_emulator.screen_dimensions[0] - 130
     height = custom_height if custom_height else 70
 
     # Take a screenshot of the message area.
-    screenshot = _get_screenshot(x, y, width, height, 'get-message-text.png')
+    screenshot = _get_screenshot(x, y, width, height, "get-message-text.png")
 
     # Extract the text.
     text = _get_ocr_text(screenshot)
@@ -375,11 +355,11 @@ def check_is_pokemon_hooked():
 
     # Take a screenshot of the alert area.
     screenshot = _get_screenshot(
-        int(screen_width / 2) - 10,
-        int(screen_height / 2) - 10 - 50,
+        int(my_emulator.screen_dimensions[0] / 2) - 10,
+        int(my_emulator.screen_dimensions[1] / 2) - 10 - 50,
         24,
         24,
-        'check-is-fish-hooked.png'
+        "check-is-fish-hooked.png",
     )
 
     is_scanning_image = True
@@ -406,8 +386,8 @@ def check_is_pokemon_hooked():
 
 def check_is_pokemon_caught():
     """
-    Checks if pokémon that the player is currently battling has already 
-    been caught. Warning! This function should not be used for trainer battles 
+    Checks if pokémon that the player is currently battling has already
+    been caught. Warning! This function should not be used for trainer battles
     because it will always return false.
 
     Returns:
@@ -415,7 +395,7 @@ def check_is_pokemon_caught():
     """
 
     # Take a screenshot of the icon area.
-    screenshot = _get_screenshot(6, 80, 14, 14, 'check-is-pokemon-caught.png')
+    screenshot = _get_screenshot(6, 80, 14, 14, "check-is-pokemon-caught.png")
 
     is_scanning_image = True
     is_caught = False
@@ -450,9 +430,10 @@ def check_is_battling():
     # Take a screenshot of the message area.
     screenshot = _get_screenshot(
         30,
-        screen_height - 80,
-        screen_width - 130, 70,
-        'check-is-battling.png'
+        my_emulator.screen_dimensions[1] - 80,
+        my_emulator.screen_dimensions[0] - 130,
+        70,
+        "check-is-battling.png",
     )
 
     is_scanning_image = True
@@ -494,19 +475,13 @@ def check_is_leveling_up():
     """
 
     # Take a screenshot of the leveling area.
-    screenshot = _get_screenshot(
-        270,
-        145,
-        180,
-        30,
-        'check-is-leveling-up.png'
-    )
+    screenshot = _get_screenshot(270, 145, 180, 30, "check-is-leveling-up.png")
 
     # Extract the text.
     text = _get_ocr_text(screenshot)
     text = text.lower()
 
-    return 'attack' in text
+    return "attack" in text
 
 
 def check_is_registering():
@@ -519,11 +494,11 @@ def check_is_registering():
 
     # Take a screenshot of banner area.
     screenshot = _get_screenshot(
-        screen_width - 20,
+        my_emulator.screen_dimensions[0] - 20,
         0,
         10,
         10,
-        'check-is-pokemon-registered.png'
+        "check-is-pokemon-registered.png",
     )
 
     is_scanning_image = True
@@ -563,7 +538,7 @@ def throw_pokeball():
     Tells the character to throw a pokéball.
     """
 
-    print('Throwing pokéball...')
+    print("Throwing pokéball...")
 
     do_long_press(Key.up, 0.5)
     time.sleep(0.5)
@@ -571,15 +546,15 @@ def throw_pokeball():
     time.sleep(0.5)
     do_long_press(Key.down, 0.5)
     time.sleep(0.5)
-    do_long_press('x', 0.5)
+    do_long_press("x", 0.5)
     time.sleep(0.5)
     do_long_press(Key.right, 0.5)
     time.sleep(0.5)
-    do_long_press('x', 0.5)
+    do_long_press("x", 0.5)
     time.sleep(0.5)
-    do_long_press('x', 0.5)
+    do_long_press("x", 0.5)
     time.sleep(0.5)
-    do_long_press('x', 0.5)
+    do_long_press("x", 0.5)
 
 
 def do_battle():
@@ -587,7 +562,7 @@ def do_battle():
     Tells the character to start battling.
     """
 
-    print('Preparing for battle...')
+    print("Preparing for battle...")
 
     pokemon_name = _get_pokemon_name()
     _fuzzy_match_pokemon_name(pokemon_name)
@@ -596,37 +571,37 @@ def do_battle():
 
     while is_battling:
         if not check_is_battling():
-            print('The battle appears to have ended.')
+            print("The battle appears to have ended.")
             is_battling = False
             break
 
         if check_is_registering():
-            print('Registering pokémon...')
-            do_long_press('x', 0.5)
+            print("Registering pokémon...")
+            do_long_press("x", 0.5)
 
         elif check_is_leveling_up():
-            print('Leveling up...')
-            do_long_press('z', 0.5)
+            print("Leveling up...")
+            do_long_press("z", 0.5)
 
         else:
             # Get the message text.
             battle_text = get_message_text(custom_width=95, custom_height=35)
 
-            if 'what will' in battle_text:
+            if "what will" in battle_text:
                 if not check_is_pokemon_caught():
-                    print('Pokémon not already caught.')
+                    print("Pokémon not already caught.")
                     throw_pokeball()
                 else:
-                    print('Attacking pokémon...')
+                    print("Attacking pokémon...")
                     do_long_press(Key.up, 0.5)
                     time.sleep(0.5)
-                    do_long_press('x', 0.5)
+                    do_long_press("x", 0.5)
                     time.sleep(0.5)
-                    do_long_press('x', 0.5)
+                    do_long_press("x", 0.5)
 
-            if 'give' in battle_text:
-                print('Skipping nickname...')
-                do_long_press('z', 0.5)
+            if "give" in battle_text:
+                print("Skipping nickname...")
+                do_long_press("z", 0.5)
 
         # Wait between checking messages.
         time.sleep(2)
@@ -640,8 +615,8 @@ def do_fishing():
     is_fishing = True
 
     while is_fishing:
-        print('Using fishing rod...')
-        do_long_press('a', 0.5)
+        print("Using fishing rod...")
+        do_long_press("a", 0.5)
 
         waiting_for_fish = True
 
@@ -649,17 +624,17 @@ def do_fishing():
             fish_alert = check_is_pokemon_hooked()
 
             if fish_alert:
-                print('Hooking pokémon...')
-                do_long_press('x', 0.5)
+                print("Hooking pokémon...")
+                do_long_press("x", 0.5)
                 time.sleep(1)
 
             # Get the message text.
             fish_caught_text = get_message_text()
 
-            if 'landed' in fish_caught_text:
-                print('You landed a pokémon!')
+            if "landed" in fish_caught_text:
+                print("You landed a pokémon!")
                 time.sleep(0.5)
-                do_long_press('x', 0.5)
+                do_long_press("x", 0.5)
 
                 # Wait for the animation to finish.
                 time.sleep(18)
@@ -669,30 +644,28 @@ def do_fishing():
 
                 # Cast the line back into the water.
                 time.sleep(10)
-                print('Using fishing rod...')
-                do_long_press('a', 0.5)
+                print("Using fishing rod...")
+                do_long_press("a", 0.5)
 
             # Get the message text.
             no_fish_text = get_message_text()
 
-            if 'not even' in no_fish_text:
-                print('Not even a nibble!')
+            if "not even" in no_fish_text:
+                print("Not even a nibble!")
                 time.sleep(0.5)
-                do_long_press('x', 0.5)
+                do_long_press("x", 0.5)
                 waiting_for_fish = False
             else:
                 # TODO: Create our own trainddata for words like "pokémon", etc.
                 # https://tesseract-ocr.github.io/tessdoc/#training-for-tesseract-5
                 fish_got_away_text = get_message_text(
-                    custom_x=168,
-                    custom_width=96,
-                    custom_height=35
+                    custom_x=168, custom_width=96, custom_height=35
                 )
 
-                if 'got away' in fish_got_away_text:
-                    print('The pokémon got away!')
+                if "got away" in fish_got_away_text:
+                    print("The pokémon got away!")
                     time.sleep(0.5)
-                    do_long_press('x', 0.5)
+                    do_long_press("x", 0.5)
                     waiting_for_fish = False
 
         # Wait between fishing attempts.
@@ -704,7 +677,7 @@ def do_patrol():
     Tells the character to start patrolling.
     """
 
-    print('Starting patrol...')
+    print("Starting patrol...")
 
     is_patrolling = True
 
@@ -712,11 +685,11 @@ def do_patrol():
         # Get the battle text.
         battle_text = get_message_text(custom_width=95, custom_height=35)
 
-        if 'what will' in battle_text:
+        if "what will" in battle_text:
             # Run the battle script.
             do_battle()
 
-            print('Resuming patrol...')
+            print("Resuming patrol...")
         else:
             # Walk back and forth.
             do_walk_left()
@@ -731,16 +704,16 @@ if len(sys.argv) > 1:
     # Get the first argument (e.g., `python pykemon.py patrol`), if any.
     first_arg = sys.argv[1]
 
-    if first_arg == 'fish':
+    if first_arg == "fish":
         do_fishing()
 
-    if first_arg == 'battle':
+    if first_arg == "battle":
         do_battle()
 
-    if first_arg == 'patrol':
+    if first_arg == "patrol":
         do_patrol()
 
-    if first_arg == 'reset':
-        print('Keyboard has been reset.')
+    if first_arg == "reset":
+        print("Keyboard has been reset.")
 else:
     print("No arguments were passed.")
