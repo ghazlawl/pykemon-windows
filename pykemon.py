@@ -1,16 +1,17 @@
-from fuzzywuzzy import process
 from pynput.keyboard import Controller, Key
-from PIL import ImageGrab, ImageOps
+from PIL import ImageOps
 
 from imports.emulator import Emulator
+from imports.screentail import Screentail
+from imports.pokedex import Pokedex
 
-import csv
-import pygetwindow as gw
 import pytesseract
 import sys
 import time
 
 my_emulator = Emulator()
+my_screentail = Screentail(my_emulator)
+my_pokedex = Pokedex()
 
 # Set the tesseract executable location.
 # TODO: Move this to the .env file.
@@ -28,154 +29,6 @@ keyboard.release(Key.left)
 keyboard.release(Key.right)
 keyboard.release(Key.up)
 keyboard.release(Key.down)
-
-POKEMON_DB = []
-POKEMON_TYPES = {}
-
-
-def _load_pokemon_db():
-    global POKEMON_DB
-
-    print("Loading Pokémon database...")
-
-    # Open the CSV file.
-    with open(
-        "data/pokedex-platinum.csv", mode="r", newline="", encoding="utf-8"
-    ) as csv_file:
-        # Read the CSV into a dictionary.
-        csv_reader = csv.DictReader(csv_file)
-
-        # Convert the CSV rows to a list of dictionaries.
-        POKEMON_DB = list(csv_reader)
-
-
-_load_pokemon_db()
-
-
-def _load_pokemon_types():
-    global POKEMON_TYPES
-
-    print("Loading Pokémon types...")
-
-    # Open the CSV file.
-    with open(
-        "data/pokemon-types.csv", mode="r", newline="", encoding="utf-8"
-    ) as csv_file:
-        # Read the CSV into a dictionary.
-        csv_reader = csv.DictReader(csv_file)
-
-        # Loop through the rows and populate the dictionary.
-        for row in csv_reader:
-            # Extract the type and weaknesses from the row.
-            type = row["Type"]
-            weaknesses = [
-                row[f"Weakness {i}"] for i in range(1, 6) if row[f"Weakness {i}"]
-            ]
-
-            # Add the data to the dictionary.
-            POKEMON_TYPES[type] = weaknesses
-
-
-_load_pokemon_types()
-
-
-def _get_pokemon_weaknesses(types):
-    weaknesses = {}
-
-    for pokemon_type in types:
-        if pokemon_type in POKEMON_TYPES:
-            weaknesses[pokemon_type] = POKEMON_TYPES[pokemon_type]
-
-    return weaknesses
-
-
-def _fuzzy_match_pokemon_name(search_name):
-    # Extract the list of names from the data
-    names = [entry["Name"] for entry in POKEMON_DB]
-
-    # Find the best match
-    best_match = process.extractOne(search_name, names)
-
-    # Get the corresponding data for the best match
-    matched_entry = next(
-        entry for entry in POKEMON_DB if entry["Name"] == best_match[0]
-    )
-
-    print("+", "-" * 20, "+")
-    print(f"Searching pokédex for '{search_name}'...")
-    print(f"Name: {matched_entry['Name']}")
-    print(f"Height/Weight: {matched_entry['Height']}, {matched_entry['Weight']} lbs")
-    print(f"Local Index: {matched_entry['Local Index']}")
-    print(f"Types: {', '.join([matched_entry['Type 1'], matched_entry['Type 2']])}")
-
-    weakness_list = _get_pokemon_weaknesses(
-        [matched_entry["Type 1"], matched_entry["Type 2"]]
-    )
-    for type, weaknesses in weakness_list.items():
-        print(f"Weaknesses of {type}: {weaknesses}")
-
-    print("+", "-" * 20, "+")
-
-    return matched_entry
-
-
-def _get_screenshot_bbox(x, y, width, height):
-    """
-    Converts the specified x, y, width, and height to a bounding box for use
-    with the Pillow library.
-
-    Args:
-        x (int): The X coordinate.
-        y (int): The Y coordinate.
-        width (int): The width of the box.
-        height (int): The height of the box.
-
-    Returns:
-        tuple: The bounding box, as a tuple.
-
-    Example:
-        >>> _get_screenshot_bbox(100, 100, 200, 100)
-        (100, 100, 300, 200)
-    """
-
-    starting_x = my_emulator.emulator_position[0]
-    starting_y = my_emulator.emulator_position[1] + my_emulator.emulator_menu_height
-
-    x1 = starting_x + x
-    y1 = starting_y + y
-    x2 = x1 + width
-    y2 = y1 + height
-
-    return (x1, y1, x2, y2)
-
-
-def _get_screenshot(x, y, width, height, filename=None):
-    """
-    Gets a screenshot of the specified area.
-
-    Args:
-        x (int): The X coordinate.
-        y (int): The Y coordinate.
-        width (int): The width of the area to capture.
-        height (int): The height of the area to capture.
-        filename (str): (Optional) The filename to save the screenshot to.
-
-    Returns:
-        Image: The screenshot.
-    """
-
-    # Get the bounding box.
-    bbox = _get_screenshot_bbox(x, y, width, height)
-
-    # Take the screenshot and convert to RGB.
-    screenshot = ImageGrab.grab(all_screens=True, bbox=bbox)
-    screenshot = screenshot.convert("RGB")
-
-    # Save the screenshot.
-    if filename:
-        screenshot.save(f"pillow/{filename}")
-
-    return screenshot
 
 
 def _get_ocr_text(screenshot):
@@ -206,7 +59,7 @@ def _get_ocr_text(screenshot):
 
 def _get_pokemon_name():
     # Take a screenshot of the leveling area.
-    screenshot = _get_screenshot(0, 50, 120, 26, "get-pokemon-name.png")
+    screenshot = my_screentail.get_screenshot(0, 50, 120, 26, "get-pokemon-name.png")
 
     # Load the image into memory to access pixels
     pixels = screenshot.load()
@@ -251,7 +104,7 @@ def _debug_screen_1():
     Captures a screenshot of the top screen. Used to confirm x, y, width,
     and height values.
     """
-    screenshot = _get_screenshot(
+    screenshot = my_screentail.get_screenshot(
         0,
         0,
         my_emulator.screen_dimensions[0],
@@ -267,7 +120,7 @@ def _debug_screen_2():
     Captures a screenshot of the bottom screen. Used to confirm x, y, width,
     and height values.
     """
-    screenshot = _get_screenshot(
+    screenshot = my_screentail.get_screenshot(
         0,
         my_emulator.screen_dimensions[1],
         my_emulator.screen_dimensions[0],
@@ -335,7 +188,9 @@ def get_message_text(
     height = custom_height if custom_height else 70
 
     # Take a screenshot of the message area.
-    screenshot = _get_screenshot(x, y, width, height, "get-message-text.png")
+    screenshot = my_screentail.get_screenshot(
+        x, y, width, height, "get-message-text.png"
+    )
 
     # Extract the text.
     text = _get_ocr_text(screenshot)
@@ -354,7 +209,7 @@ def check_is_pokemon_hooked():
     """
 
     # Take a screenshot of the alert area.
-    screenshot = _get_screenshot(
+    screenshot = my_screentail.get_screenshot(
         int(my_emulator.screen_dimensions[0] / 2) - 10,
         int(my_emulator.screen_dimensions[1] / 2) - 10 - 50,
         24,
@@ -395,7 +250,9 @@ def check_is_pokemon_caught():
     """
 
     # Take a screenshot of the icon area.
-    screenshot = _get_screenshot(6, 80, 14, 14, "check-is-pokemon-caught.png")
+    screenshot = my_screentail.get_screenshot(
+        6, 80, 14, 14, "check-is-pokemon-caught.png"
+    )
 
     is_scanning_image = True
     is_caught = False
@@ -428,7 +285,7 @@ def check_is_battling():
     """
 
     # Take a screenshot of the message area.
-    screenshot = _get_screenshot(
+    screenshot = my_screentail.get_screenshot(
         30,
         my_emulator.screen_dimensions[1] - 80,
         my_emulator.screen_dimensions[0] - 130,
@@ -475,7 +332,9 @@ def check_is_leveling_up():
     """
 
     # Take a screenshot of the leveling area.
-    screenshot = _get_screenshot(270, 145, 180, 30, "check-is-leveling-up.png")
+    screenshot = my_screentail.get_screenshot(
+        270, 145, 180, 30, "check-is-leveling-up.png"
+    )
 
     # Extract the text.
     text = _get_ocr_text(screenshot)
@@ -493,7 +352,7 @@ def check_is_registering():
     """
 
     # Take a screenshot of banner area.
-    screenshot = _get_screenshot(
+    screenshot = my_screentail.get_screenshot(
         my_emulator.screen_dimensions[0] - 20,
         0,
         10,
@@ -565,7 +424,8 @@ def do_battle():
     print("Preparing for battle...")
 
     pokemon_name = _get_pokemon_name()
-    _fuzzy_match_pokemon_name(pokemon_name)
+    pokedex_entry = my_pokedex.get_pokemon_entry_fuzzy(pokemon_name)
+    my_pokedex.print_pokemon_card(pokedex_entry)
 
     is_battling = True
 
