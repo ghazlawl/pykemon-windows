@@ -1,6 +1,6 @@
 from fuzzywuzzy import process
-
 import csv
+import re
 
 
 class Pokedex:
@@ -9,6 +9,19 @@ class Pokedex:
     weakness_matrix = {}
 
     CARD_WIDTH = 60
+
+    COLORS = {
+        "BLACK": "\033[30m",
+        "RED": "\33[91m",
+        "GREEN": "\033[32m",
+        "YELLOW": "\033[93m",
+        "BLUE": "\33[94m",
+        "PURPLE": "\033[0;35m",
+        "CYAN": "\033[36m",
+        "WHITE": "\033[37m",
+        "END": "\033[0m",
+        "GRAY": "\033[38;5;8m",
+    }
 
     def __init__(self):
         print("Loading Pokémon database...")
@@ -157,43 +170,85 @@ class Pokedex:
         return weaknesses
 
     def print_pokemon_card(self, entry):
+        """
+        Prints the card for the specified pokedex entry.
+
+        Args:
+            entry (obj): The pokedex entry.
+        """
+
         types = [entry["Type 1"], entry["Type 2"]]
         types = [item for item in types if item]
-        types = ", ".join(types)
 
         index = int(entry["Local Index"])
         name = entry["Name"]
+        height = entry["Height"]
+        weight = entry["Weight"]
 
         print()
         print(f"╭{'━' * (self.CARD_WIDTH - 2)}╮")
-        self._print_pokedex_card_line(f"Pokedex No: {index:03}")
-        self._print_pokedex_card_line(f"Name: {name}")
-        self._print_pokedex_card_line(f"Type: {types}")
 
-        strengths = self.get_type_strengths([entry["Type 1"], entry["Type 2"]])
+        self.__print_card_line(
+            f"Pokedex No: {self.COLORS['GRAY']}{index:03}{self.COLORS['END']}"
+        )
 
-        for type, list in strengths.items():
-            list = [item for item in list if item]
-            list = ", ".join(list)
+        self.__print_card_line(f"Name: {self.COLORS['GRAY']}{name}{self.COLORS['END']}")
 
-            self._print_pokedex_card_line(
-                f"Strong Against: {list if len(list) > 0 else 'Nothing'}"
-            )
+        self.__print_card_line(
+            f"Height/Weight: {self.COLORS['GRAY']}{height} {weight} lbs{self.COLORS['END']}"
+        )
 
-        weaknesses = self.get_type_weaknesses([entry["Type 1"], entry["Type 2"]])
+        for index, type in enumerate(types):
+            if type:
+                self.__print_card_line(
+                    f"Type {index + 1}: {self.COLORS['GRAY']}{type}{self.COLORS['END']}"
+                )
 
-        for type, list in weaknesses.items():
-            list = [item for item in list if item]
-            list = ", ".join(list)
+                # Get the strengths, if any.
+                strengths = self.get_type_strengths([entry[f"Type {index + 1}"]])
 
-            self._print_pokedex_card_line(f"Weak Against: {list if len(list) > 0 else 'Nothing'}")
+                # Output the strengths.
+                for type, list in strengths.items():
+                    list = [item for item in list if item]
+                    list = ", ".join(list)
+
+                    self.__print_card_line(
+                        f"Type {index + 1} Strong: {self.COLORS['GRAY']}{list if len(list) > 0 else 'Nothing'}{self.COLORS['END']}"
+                    )
+
+                # Get the weaknesses, if any.
+                weaknesses = self.get_type_weaknesses([entry[f"Type {index + 1}"]])
+
+                for type, list in weaknesses.items():
+                    list = [item for item in list if item]
+                    list = ", ".join(list)
+
+                    self.__print_card_line(
+                        f"Type {index + 1} Weak: {self.COLORS['GRAY']}{list if len(list) > 0 else 'Nothing'}{self.COLORS['END']}"
+                    )
 
         print(f"╰{'─' * (self.CARD_WIDTH - 2)}╯")
         print()
 
-    def _print_pokedex_card_line(self, text):
+    def __print_card_line(self, text):
+        """
+        Prints a card line. Supports ANSI escape characters for colorization.
+
+        Args:
+            text (str): The text to print.
+        """
+
+        # Get the length of the original text.
+        original_text_length = len(text)
+
+        # Get the length of the text without ANSI escape characters.
+        visible_text_length = len(re.sub(r"\x1b\[[0-9;]*m", "", text))
+
+        # Calculate the difference.
+        length_diff = original_text_length - visible_text_length
+
         print(
             "│",
-            f"{text:{(self.CARD_WIDTH - 4)}}",
+            f"{text:{(self.CARD_WIDTH - 4 + length_diff)}}",
             "│",
         )
