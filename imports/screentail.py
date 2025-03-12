@@ -1,13 +1,9 @@
-from PIL import ImageGrab, ImageOps
+from PIL import ImageGrab
 
 
 class Screentail:
-    my_emulator = None
-
-    def __init__(self, emulator):
-        self.my_emulator = emulator
-
-    def get_screenshot_bbox(self, x, y, width, height):
+    @staticmethod
+    def get_screenshot_bbox(emulator, x, y, width, height):
         """
         Converts the specified x, y, width, and height to a bounding box for use
         with the Pillow library.
@@ -26,10 +22,10 @@ class Screentail:
             (100, 100, 300, 200)
         """
 
-        starting_x = self.my_emulator.emulator_position[0]
+        starting_x = emulator.emulator_position[0]
         starting_y = (
-            self.my_emulator.emulator_position[1]
-            + self.my_emulator.emulator_menu_height
+            emulator.emulator_position[1]
+            + emulator.emulator_menu_height
         )
 
         x1 = starting_x + x
@@ -39,11 +35,13 @@ class Screentail:
 
         return (x1, y1, x2, y2)
 
-    def get_screenshot(self, x, y, width, height, filename=None):
+    @staticmethod
+    def get_screenshot(emulator, x, y, width, height, filename=None):
         """
         Gets a screenshot of the specified area.
 
         Args:
+            emulator (window): The emulator window.
             x (int): The X coordinate.
             y (int): The Y coordinate.
             width (int): The width of the area to capture.
@@ -55,7 +53,7 @@ class Screentail:
         """
 
         # Get the bounding box.
-        bbox = self.get_screenshot_bbox(x, y, width, height)
+        bbox = Screentail.get_screenshot_bbox(emulator, x, y, width, height)
 
         # Take the screenshot and convert to RGB.
         screenshot = ImageGrab.grab(all_screens=True, bbox=bbox)
