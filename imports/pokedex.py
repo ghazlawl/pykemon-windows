@@ -11,7 +11,10 @@ class Pokedex:
     CARD_WIDTH = 60
 
     def __init__(self):
+        print("Loading Pokémon database...")
         self.load_pokemon_db()
+
+        print("Loading Pokémon strength/weakness matrices...")
         self.load_strength_matrix()
         self.load_weakness_matrix()
 
@@ -20,8 +23,6 @@ class Pokedex:
         Loads the pokemon database from a CSV. Loaded data includes
         index, name, type(s), height, and weight.
         """
-
-        print("Loading Pokémon database...")
 
         # Open the CSV file.
         with open(
@@ -35,9 +36,27 @@ class Pokedex:
 
     def load_strength_matrix(self):
         """
-        TODO: Loads the strength matrix, which is a list of types and what
+        Loads the strength matrix, which is a list of types and what
         each type is strong against.
         """
+
+        # Open the CSV file.
+        with open(
+            "data/pokemon-strengths.csv", mode="r", newline="", encoding="utf-8"
+        ) as csv_file:
+            # Read the CSV into a dictionary.
+            csv_reader = csv.DictReader(csv_file)
+
+            # Loop through the rows and populate the dictionary.
+            for row in csv_reader:
+                # Extract the type and strength from the row.
+                type = row["Type"]
+                strengths = [
+                    row[f"Strength {i}"] for i in range(1, 6) if row[f"Strength {i}"]
+                ]
+
+                # Add the data to the dictionary.
+                self.strength_matrix[type] = strengths
 
         pass
 
@@ -46,8 +65,6 @@ class Pokedex:
         Loads the weakness matrix, which is a list of types and what
         each type is weak against.
         """
-
-        print("Loading Pokémon weakness matrix...")
 
         # Open the CSV file.
         with open(
@@ -86,43 +103,45 @@ class Pokedex:
             { name: "Pikachu", height: "1'2\"", weight: "1.4", ...}
         """
 
-        # Extract the list of names from the data
+        # Extract the list of names from the data.
         names = [entry["Name"] for entry in self.pokemon_db]
 
-        # Find the best match
+        # Find the best match.
         best_match = process.extractOne(search, names)
 
-        # Get the corresponding data for the best match
+        # Get the corresponding data for the best match.
         matched_entry = next(
             entry for entry in self.pokemon_db if entry["Name"] == best_match[0]
         )
 
-        # print("+", "-" * 20, "+")
-        # print(f"Searching pokémon database for '{search}'...")
-        # print(f"Name: {matched_entry['Name']}")
-        # print(
-        #     f"Height/Weight: {matched_entry['Height']}, {matched_entry['Weight']} lbs"
-        # )
-        # print(f"Local Index: {matched_entry['Local Index']}")
-        # print(f"Types: {', '.join([matched_entry['Type 1'], matched_entry['Type 2']])}")
-
-        # weakness_list = self.get_type_weaknesses(
-        #     [matched_entry["Type 1"], matched_entry["Type 2"]]
-        # )
-
-        # for type, weaknesses in weakness_list.items():
-        #     print(f"Weaknesses of {type}: {weaknesses}")
-
-        # print("+", "-" * 20, "+")
-
         return matched_entry
+
+    def get_type_strengths(self, types):
+        """
+        Gets the types of attacks the specified types are strong against.
+
+        Args:
+            type (str[]): The type to check.
+
+        Example:
+            >>> get_type_strengths('Electric')
+            ['Water', 'Flying']
+        """
+
+        strengths = {}
+
+        for pokemon_type in types:
+            if pokemon_type in self.strength_matrix:
+                strengths[pokemon_type] = self.strength_matrix[pokemon_type]
+
+        return strengths
 
     def get_type_weaknesses(self, types):
         """
-        Gets the types of attacks the specified type is weak to.
+        Gets the types of attacks the specified types are weak to.
 
         Args:
-            type (str): The type to check.
+            type (str[]): The type to check.
 
         Example:
             >>> get_type_weaknesses('Fighting')
@@ -138,7 +157,7 @@ class Pokedex:
         return weaknesses
 
     def print_pokemon_card(self, entry):
-        types = [entry['Type 1'], entry['Type 2']]
+        types = [entry["Type 1"], entry["Type 2"]]
         types = [item for item in types if item]
         types = ", ".join(types)
 
@@ -150,15 +169,24 @@ class Pokedex:
         self._print_pokedex_card_line(f"Pokedex No: {index:03}")
         self._print_pokedex_card_line(f"Name: {name}")
         self._print_pokedex_card_line(f"Type: {types}")
-        self._print_pokedex_card_line("Strong Against: ?")
+
+        strengths = self.get_type_strengths([entry["Type 1"], entry["Type 2"]])
+
+        for type, list in strengths.items():
+            list = [item for item in list if item]
+            list = ", ".join(list)
+
+            self._print_pokedex_card_line(
+                f"Strong Against: {list if len(list) > 0 else 'Nothing'}"
+            )
 
         weaknesses = self.get_type_weaknesses([entry["Type 1"], entry["Type 2"]])
 
         for type, list in weaknesses.items():
             list = [item for item in list if item]
             list = ", ".join(list)
-            
-            self._print_pokedex_card_line(f"Weakness: {list}")
+
+            self._print_pokedex_card_line(f"Weak Against: {list if len(list) > 0 else 'Nothing'}")
 
         print(f"╰{'─' * (self.CARD_WIDTH - 2)}╯")
         print()
