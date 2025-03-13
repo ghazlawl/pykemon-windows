@@ -116,16 +116,23 @@ class Pokedex:
             { name: "Pikachu", height: "1'2\"", weight: "1.4", ...}
         """
 
-        # Extract the list of names from the data.
-        names = [entry["Name"] for entry in self.pokemon_db]
-
-        # Find the best match.
-        best_match = process.extractOne(search, names)
-
         # Get the corresponding data for the best match.
         matched_entry = next(
-            entry for entry in self.pokemon_db if entry["Name"] == best_match[0]
+            (entry for entry in self.pokemon_db if entry["Local Index"] == str(search)), None
         )
+
+        if not matched_entry:
+            # Extract the list of names from the data.
+            names = [entry["Name"] for entry in self.pokemon_db]
+
+            # Find the best match.
+            best_match = process.extractOne(str(search), names)
+
+            # Get the corresponding data for the best match.
+            matched_entry = next(
+                (entry for entry in self.pokemon_db if entry["Name"] == best_match[0]),
+                None,
+            )
 
         return matched_entry
 

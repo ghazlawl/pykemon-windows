@@ -73,3 +73,12 @@ def get_ocr_text(screenshot):
     text = text.strip()
 
     return text
+
+
+def get_ocr_numbers(screenshot):
+    # Use pytesseract to do OCR on the image.
+    custom_config = r"--oem 3 --psm 6  -c tessedit_char_whitelist=0123456789"
+    text = pytesseract.image_to_string(screenshot, lang="eng", config=custom_config)
+    text = text.strip()
+
+    return text
