@@ -33,13 +33,15 @@ class Pokedex:
 
     def load_pokemon_db(self):
         """
-        Loads the pokemon database from a CSV. Loaded data includes
+        Loads the pokémon database from a CSV. Loaded data includes
         index, name, type(s), height, and weight.
         """
 
+        file_name = "pokedex-platinum.csv"
+
         # Open the CSV file.
         with open(
-            "data/pokedex-platinum.csv", mode="r", newline="", encoding="utf-8"
+            f"data/{file_name}", mode="r", newline="", encoding="utf-8"
         ) as csv_file:
             # Read the CSV into a dictionary.
             csv_reader = csv.DictReader(csv_file)
@@ -99,17 +101,15 @@ class Pokedex:
 
     def get_pokemon_entry_fuzzy(self, search):
         """
-        Gets the pokedex entry for the specified value using a
+        Gets the pokédex entry for the specified value using a
         fuzzy search. OCR is not 100% accurate (for now) so using a
         fuzzy search is currently the best way to get entries.
 
-        TODO: Return the pokedex entry instead of printing the values.
-
         Args:
-            search (str): The pokemon name to search for.
+            search (str): The pokémon name to search for.
 
         Returns:
-            entry: The pokedex entry object.
+            entry: The pokédex entry object.
 
         Example:
             >>> get_pokemon_entry_fuzzy('picklchu')
@@ -118,7 +118,8 @@ class Pokedex:
 
         # Get the corresponding data for the best match.
         matched_entry = next(
-            (entry for entry in self.pokemon_db if entry["Local Index"] == str(search)), None
+            (entry for entry in self.pokemon_db if entry["Local Index"] == str(search)),
+            None,
         )
 
         if not matched_entry:
@@ -178,10 +179,10 @@ class Pokedex:
 
     def print_pokemon_card(self, entry):
         """
-        Prints the card for the specified pokedex entry.
+        Prints the card for the specified pokédex entry.
 
         Args:
-            entry (obj): The pokedex entry.
+            entry (obj): The pokédex entry.
         """
 
         types = [entry["Type 1"], entry["Type 2"]]
@@ -259,3 +260,38 @@ class Pokedex:
             f"{text:{(self.CARD_WIDTH - 4 + length_diff)}}",
             "│",
         )
+
+    def update_entry(self, local_index, entry):
+        """
+        Updates the pokedex entry that matches the specified local index.
+
+        Args:
+            local_index (int): The local index in the pokedex.
+            entry (obj): The updated entry.
+        """
+
+        for index, value in enumerate(self.pokemon_db):
+            if value["Local Index"] == local_index:
+                self.pokemon_db[index] = entry
+
+        file_name = "pokedex-platinum.csv"
+
+        with open(f"data/{file_name}", mode="w", newline="") as file:
+            writer = csv.DictWriter(
+                file,
+                fieldnames=[
+                    "National Index",
+                    "Local Index",
+                    "Name",
+                    "Type 1",
+                    "Type 2",
+                    "Height",
+                    "Weight",
+                    "Description",
+                    "Seen",
+                    "Caught",
+                ],
+            )
+
+            writer.writeheader()
+            writer.writerows(self.pokemon_db)

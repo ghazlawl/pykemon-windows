@@ -1,220 +1,216 @@
-National Index,Local Index,Name,Type 1,Type 2,Height,Weight
-387,1,Turtwig,Grass,,1'04",23
-388,2,Grotle,Grass,,3'07",214
-389,3,Torterra,Grass,Ground,7'03",683
-390,4,Chimchar,Fire,,1'08",14
-391,5,Monferno,Fire,Fighting,2'11",49
-392,6,Infernape,Fire,Fighting,3'11",121
-393,7,Piplup,Water,,1'04",12
-394,8,Prinplup,Water,,2'07",51
-395,9,Empoleon,Water,Steel,5'07",186
-396,10,Starly,Normal,Flying,1'00",4
-397,11,Staravia,Normal,Flying,2'00",34
-398,12,Staraptor,Normal,Flying,3'11",55
-399,13,Bidoof,Normal,,1'08",44
-400,14,Bibarel,Normal,Water,3'03",69
-401,15,Kricketot,Bug,,1'00",5
-402,16,Kricketune,Bug,,3'03",56
-403,17,Shinx,Electric,,1'08",21
-404,18,Luxio,Electric,,2'11",67
-405,19,Luxray,Electric,,4'07",93
-63,20,Abra,Psychic,,2'11",43
-64,21,Kadabra,Psychic,,4'03",124.6
-65,22,Alakazam,Psychic,,4'11",105.8
-129,23,Magikarp,Water,,2'11",22
-130,24,Gyarados,Water,Flying,21'04",518.1
-406,25,Budew,Grass,Poison,0'08",3
-315,26,Roselia,Grass,Poison,1'00",4.4
-407,27,Roserade,Grass,Poison,2'11",32
-41,28,Zubat,Poison,Flying,2'07",16.5
-42,29,Golbat,Poison,Flying,5'03",121.3
-169,30,Crobat,Poison,Flying,5'11",165.3
-74,31,Geodude,Rock,Ground,1'04",44.1
-75,32,Graveler,Rock,Ground,3'03",231.5
-76,33,Golem,Rock,Ground,4'07",661.4
-95,34,Onix,Rock,Ground,28'10",463
-208,35,Steelix,Steel,Ground,30'02",881.8
-408,36,Cranidos,Rock,,2'11",69
-409,37,Rampardos,Rock,,5'03",226
-410,38,Shieldon,Rock,Steel,1'08",126
-411,39,Bastiodon,Rock,Steel,4'03",330
-66,40,Machop,Fighting,,2'07",43
-67,41,Machoke,Fighting,,4'11",155.4
-68,42,Machamp,Fighting,,5'03",286.6
-54,43,Psyduck,Water,,2'07",43.2
-55,44,Golduck,Water,,5'07",168.9
-412,45,Burmy (Plant),Bug,,0'08",8
-412,45,Burmy (Sandy),Bug,,0'08",8
-412,45,Burmy (Trash),Bug,,0'08",8
-413,46,Wormadam (Plant),Bug,Grass,1'08",14
-413,46,Wormadam (Sandy),Bug,Ground,1'08",14
-413,46,Wormadam (Trash),Bug,Steel,1'08",14
-414,47,Mothim,Bug,Flying,2'11",51
-265,48,Wurmple,Bug,,1'00",7.9
-266,49,Silcoon,Bug,,2'00",22
-267,50,Beautifly,Bug,Flying,3'03",62.6
-268,51,Cascoon,Bug,,2'04",25.4
-269,52,Dustox,Bug,Poison,3'11",69.7
-415,53,Combee,Bug,Flying,1'00",12
-416,54,Vespiquen,Bug,Flying,3'11",85
-417,55,Pachirisu,Electric,,1'04",9
-418,56,Buizel,Water,,2'04",65
-419,57,Floatzel,Water,,3'07",74
-420,58,Cherubi,Grass,,1'04",7
-421,59,Cherrim,Grass,,1'08",21
-422,60,Shellos,Water,,1'00",14
-423,61,Gastrodon,Water,Ground,2'11",66
-214,62,Heracross,Bug,Fighting,4'11",119
-190,63,Aipom,Normal,,2'07",25.4
-424,64,Ambipom,Normal,,3'11",45
-425,65,Drifloon,Ghost,Flying,1'04",3
-426,66,Drifblim,Ghost,Flying,3'11",33
-427,67,Buneary,Normal,,1'04",12
-428,68,Lopunny,Normal,,3'11",73
-92,69,Gastly,Ghost,Poison,4'03",0.2
-93,70,Haunter,Ghost,Poison,5'03",0.2
-94,71,Gengar,Ghost,Poison,4'11",89.3
-200,72,Misdreavus,Ghost,,2'04",2.2
-429,73,Mismagius,Ghost,,2'11",10
-198,74,Murkrow,Dark,Flying,1'08",4.6
-430,75,Honchkrow,Dark,Flying,2'11",60
-431,76,Glameow,Normal,,1'08",9
-432,77,Purugly,Normal,,3'03",97
-118,78,Goldeen,Water,,2'00",33.1
-119,79,Seaking,Water,,4'03",86
-339,80,Barboach,Water,Ground,1'04",4.2
-340,81,Whiscash,Water,Ground,2'11",52
-433,82,Chingling,Psychic,,0'08",1
-358,83,Chimecho,Psychic,,2'00",2.2
-434,84,Stunky,Poison,Dark,1'04",42
-435,85,Skuntank,Poison,Dark,3'03",84
-307,86,Meditite,Fighting,Psychic,2'00",24.7
-308,87,Medicham,Fighting,Psychic,4'03",69.4
-436,88,Bronzor,Steel,Psychic,1'08",133
-437,89,Bronzong,Steel,Psychic,4'03",412
-77,90,Ponyta,Fire,,3'03",66.1
-78,91,Rapidash,Fire,,5'07",209.4
-438,92,Bonsly,Rock,,1'08",33
-185,93,Sudowoodo,Rock,,3'11",83.8
-439,94,Mime Jr.,Psychic,Fairy,2'00",29
-122,95,Mr. Mime,Psychic,Fairy,4'03",120.2
-440,96,Happiny,Normal,,2'00",54
-113,97,Chansey,Normal,,3'07",76.3
-242,98,Blissey,Normal,,4'11",103.2
-173,99,Cleffa,Fairy,,1'00",6.6
-35,100,Clefairy,Fairy,,2'00",16.5
-36,101,Clefable,Fairy,,4'03",88.2
-441,102,Chatot,Normal,Flying,1'08",4
-172,103,Pichu,Electric,,1'00",4.4
-25,104,Pikachu,Electric,,1'04",13.2
-26,105,Raichu,Electric,,2'07",66.1
-163,106,Hoothoot,Normal,Flying,2'04",46.7
-164,107,Noctowl,Normal,Flying,5'03",89.9
-442,108,Spiritomb,Ghost,Dark,3'03",238
-443,109,Gible,Dragon,Ground,2'04",45
-444,110,Gabite,Dragon,Ground,4'07",124
-445,111,Garchomp,Dragon,Ground,6'03",209
-446,112,Munchlax,Normal,,2'00",232
-143,113,Snorlax,Normal,,6'11",1014.1
-201,114,Unown,Psychic,,1'08",11
-447,115,Riolu,Fighting,,2'04",45
-448,116,Lucario,Fighting,Steel,3'11",119
-194,117,Wooper,Water,Ground,1'04",18.7
-195,118,Quagsire,Water,Ground,4'07",165.3
-278,119,Wingull,Water,Flying,2'00",20.9
-279,120,Pelipper,Water,Flying,3'11",61.7
-203,121,Girafarig,Normal,Psychic,4'11",91.5
-449,122,Hippopotas,Ground,,2'07",109
-450,123,Hippowdon,Ground,,6'07",661
-298,124,Azurill,Normal,Fairy,0'08",4.4
-183,125,Marill,Water,Fairy,1'04",18.7
-184,126,Azumarill,Water,Fairy,2'07",62.8
-451,127,Skorupi,Poison,Bug,2'07",27
-452,128,Drapion,Poison,Dark,4'03",136
-453,129,Croagunk,Poison,Fighting,2'04",51
-454,130,Toxicroak,Poison,Fighting,4'03",98
-455,131,Carnivine,Grass,,4'07",60
-223,132,Remoraid,Water,,2'00",26.5
-224,133,Octillery,Water,,2'11",62.8
-456,134,Finneon,Water,,1'04",15
-457,135,Lumineon,Water,,3'11",53
-72,136,Tentacool,Water,Poison,2'11",100.3
-73,137,Tentacruel,Water,Poison,5'03",121.3
-349,138,Feebas,Water,,2'00",16.3
-350,139,Milotic,Water,,20'04",357.1
-458,140,Mantyke,Water,Flying,3'03",143
-226,141,Mantine,Water,Flying,6'11",485
-459,142,Snover,Grass,Ice,3'03",111
-460,143,Abomasnow,Grass,Ice,7'03",299
-215,144,Sneasel,Dark,Ice,2'11",61.7
-461,145,Weavile,Dark,Ice,3'07",75
-480,146,Uxie,Psychic,,1'00",1
-481,147,Mesprit,Psychic,,1'00",1
-482,148,Azelf,Psychic,,1'00",1
-483,149,Dialga,Steel,Dragon,17'09",1506
-484,150,Palkia,Water,Dragon,13'09",741
-490,151,Manaphy,Water,,1'00",3
-479,152,Rotom,Electric,Ghost,1'00",1
-479,152,Rotom (Heat),Electric,Fire,1'00",1
-479,152,Rotom (Wash),Electric,Water,1'00",1
-479,152,Rotom (Frost),Electric,Ice,1'00",1
-479,152,Rotom (Fan),Electric,Flying,1'00",1
-480,152,Rotom (Mow),Electric,Grass,1'00",1
-207,153,Gligar,Ground,Flying,3'07",142.9
-472,154,Gliscor,Ground,Flying,6'07",94
-299,155,Nosepass,Rock,,3'03",213.8
-476,156,Probopass,Rock,Steel,4'07",750
-280,157,Ralts,Psychic,Fairy,1'04",14.6
-281,158,Kirlia,Psychic,Fairy,2'07",44.5
-282,159,Gardevoir,Psychic,Fairy,5'03",106.7
-475,160,Gallade,Psychic,Fighting,5'03",115
-108,161,Lickitung,Normal,,3'11",144.4
-463,162,Lickilicky,Normal,,5'07",309
-133,163,Eevee,Normal,,1'00",14.3
-134,164,Vaporeon,Water,,3'03",63.9
-135,165,Jolteon,Electric,,2'07",54
-136,166,Flareon,Fire,,2'11",55.1
-196,167,Espeon,Psychic,,2'11",58.4
-197,168,Umbreon,Dark,,3'03",59.5
-470,169,Leafeon,Grass,,3'03",56
-471,170,Glaceon,Ice,,2'07",57
-333,171,Swablu,Normal,Flying,1'04",2.6
-334,172,Altaria,Dragon,Flying,3'07",45.4
-175,173,Togepi,Fairy,,1'00",3.3
-176,174,Togetic,Fairy,Flying,2'00",7.1
-468,175,Togekiss,Fairy,Flying,4'11",84
-228,176,Houndour,Dark,Fire,2'00",23.8
-229,177,Houndoom,Dark,Fire,4'07",77.2
-81,178,Magnemite,Electric,Steel,1'00",13.2
-82,179,Magneton,Electric,Steel,3'03",132.3
-462,180,Magnezone,Electric,Steel,3'11",397
-114,181,Tangela,Grass,,3'03",77.2
-465,182,Tangrowth,Grass,,6'07",284
-193,183,Yanma,Bug,Flying,3'11",83.8
-469,184,Yanmega,Bug,Flying,6'03",114
-357,185,Tropius,Grass,Flying,6'07",220.5
-111,186,Rhyhorn,Ground,Rock,3'03",253.5
-112,187,Rhydon,Ground,Rock,6'03",264.6
-464,188,Rhyperior,Ground,Rock,7'10",624
-355,189,Duskull,Ghost,,2'07",33.1
-356,190,Dusclops,Ghost,,5'03",67.5
-477,191,Dusknoir,Ghost,,7'03",235
-137,192,Porygon,Normal,,2'07",80.5
-233,193,Porygon2,Normal,,2'00",71.7
-474,194,Porygon-Z,Normal,,2'11",75
-123,195,Scyther,Bug,Flying,4'11",123.5
-212,196,Scizor,Bug,Steel,5'11",260.1
-239,197,Elekid,Electric,,2'00",51.8
-125,198,Electabuzz,Electric,,3'07",66.1
-466,199,Electivire,Electric,,5'11",306
-240,200,Magby,Fire,,2'04",47.2
-126,201,Magmar,Fire,,4'03",98.1
-467,202,Magmortar,Fire,,5'03",150
-220,203,Swinub,Ice,Ground,1'04",14.3
-221,204,Piloswine,Ice,Ground,3'07",123
-473,205,Mamoswine,Ice,Ground,8'02",642
-361,206,Snorunt,Ice,,2'04",37
-362,207,Glalie,Ice,,4'11",565.5
-478,208,Froslass,Ice,Ghost,4'03",59
-359,209,Absol,Dark,,3'11",103.6
-487,210,Giratina,Ghost,Dragon,22'08",1433
+National Index,Local Index,Name,Type 1,Type 2,Height,Weight,Description,Seen,Caught
+387,1,Turtwig,Grass,,"1'04""",23,"The shell on its back is made of soil. On a very healthy TURTHIG, the shell should feel moist.",True,True
+388,2,Grotle,Grass,,"3'07""",214,Tt knows where pure water wells up. It carries fellow Pokémon there on its back.,True,True
+389,3,Torterra,Grass,Ground,"7'03""",683,Some Pokémon are born on a TORTERRA's back and spend their entire life there.,True,True
+390,4,Chimchar,Fire,,"1'08""",14,"It is very agile. Before going ta sleep, it extinguishes the flame on its tail to prevent fires.",True,True
+391,5,Monferno,Fire,Fighting,"2'11""",49,,,
+392,6,Infernape,Fire,Fighting,"3'11""",121,It uses unique fighting moves with fire on its hands and feet. It will take on any opponent.,True,True
+393,7,Piplup,Water,,"1'04""",12,"Af poor walker, it often falls down. However, its strong pride makes it puff up its chest without a care.",True,True
+394,8,Prinplup,Water,,"2'07""",51,"Because every PRINPLUP considers itself to be the most important, they can never form a group.",True,True
+395,9,Empoleon,Water,Steel,"5'07""",186,,,
+396,10,Starly,Normal,Flying,"1'00""",4,"Because they are weak individually, they form groups. However, they bicker if the group grows too big.",True,True
+397,11,Staravia,Normal,Flying,"2'00""",34,"Recognizing their own weakness, they always live in a group. When alone, a STARAVIA cries noisily.",True,True
+398,12,Staraptor,Normal,Flying,"3'11""",55,,True,False
+399,13,Bidoof,Normal,,"1'08""",44,A comparison revealed that BIDOOF's front teeth grow at the same rate as RATTATA's.,True,True
+400,14,Bibarel,Normal,Water,"3'03""",69,"A river dammed by BIBAREL will never overflow its banks, which is appreciated by people nearby.",True,True
+401,15,Kricketot,Bug,,"1'00""",5,"Its legs are short. Whenever it stumbles, its stiff antennae clack with a xylophone-like sound.",True,True
+402,16,Kricketune,Bug,,"3'03""",56,There is 4 village that hosts a contest based on the amazingly variable cries of this Pokémon.,True,True
+403,17,Shinx,Electric,,"1'08""",21,The extension and contraction of its muscles generates electricity. Tt glows when in trouble.,True,True
+404,18,Luxio,Electric,,"2'11""",67,Strong electricity courses through the tips of its sharp claws. A light seratch causes fainting in foes.,True,True
+405,19,Luxray,Electric,,"4'07""",93,It can see clearly through walls to track down its prey and seek its lost young.,True,True
+63,20,Abra,Psychic,,"2'11""",43,Using its psychic power is such a strain on its brain that it needs to sleep for 18 hours a day.,True,True
+64,21,Kadabra,Psychic,,"4'03""",124.6,It stares at its silver spoon to focus its mind. It emits more alpha waves while doing so.,True,True
+65,22,Alakazam,Psychic,,"4'11""",105.8,,,
+129,23,Magikarp,Water,,"2'11""",22,"A MAGIKARP living for many years can leap a mountain using Splash. The move remains useless, though.",True,True
+130,24,Gyarados,Water,Flying,"21'04""",518.1,"Once it begins to rampage, a GYARADOS will burn everything down, even in a harsh storm.",True,True
+406,25,Budew,Grass,Poison,"0'08""",3,"Sensitive to changing temperature, the bud is said to bloom when it feels the sun's warm touch.",True,True
+315,26,Roselia,Grass,Poison,"1'00""",4.4,"The more healthy the ROSELIA, the more pleasant its flowers� aroma. Its scant deeply relaxes people.",True,True
+407,27,Roserade,Grass,Poison,"2'11""",32,"Each of its hands contains different toxins, but both hands can jab with near-fatal power.",True,True
+41,28,Zubat,Poison,Flying,"2'07""",16.5,It checks its surroundings and Jocation using reflections of the ultrasonic waves from its mouth.,True,True
+42,29,Golbat,Poison,Flying,"5'03""",121.3,Its sharp fangs puncture the toughest of hides and have small holes for greedily sucking blood.,True,True
+169,30,Crobat,Poison,Flying,"5'11""",165.3,,,
+74,31,Geodude,Rock,Ground,"1'04""",44.1,,,
+75,32,Graveler,Rock,Ground,"3'03""",231.5,"It rolls on mountain paths to move. Once it builds momentum, no Pokémon can stop it without difficulty.",True,True
+76,33,Golem,Rock,Ground,"4'07""",661.4,,,
+95,34,Onix,Rock,Ground,"28'10""",463,,,
+208,35,Steelix,Steel,Ground,"30'02""",881.8,It is thought its body transformed as aresult of iron accumulating internally from swallowing sail.,True,True
+408,36,Cranidos,Rock,,"2'11""",69,"A lifelong jungle dweller from 100 nillion years ago, it would snap obstructing trees with head butts.",True,True
+409,37,Rampardos,Rock,,"5'03""",226,,,
+410,38,Shieldon,Rock,Steel,"1'08""",126,"It is outstandingly armored. As a result, it can eat grass and berries without having ta fight.",True,True
+411,39,Bastiodon,Rock,Steel,"4'03""",330,"When they lined up side by side, no foe could break through. They shielded their young in that way.",True,True
+66,40,Machop,Fighting,,"2'07""",43,"Though small in stature, it is Powerful enough to easily heft and throw a number of GEODUDE at once.",True,True
+67,41,Machoke,Fighting,,"4'11""",155.4,It happily carries heavy cargo to toughen up. It willingly does hard work for people.,True,True
+68,42,Machamp,Fighting,,"5'03""",286.6,,,
+54,43,Psyduck,Water,,"2'07""",43.2,"Overwhelmed by enigmatic abilities, it suffers a constant headache. It sometimes uses mysterious powers.",True,True
+55,44,Golduck,Water,,"5'07""",168.9,It is seen swimming dynamically and elegant]y using its well-developed limbs and flippers.,True,True
+412,45,Burmy,Bug,,"0'08""",8,"Even if it is born where there are no cocooning materials, it somehow always ends up with a cloak.",True,True
+413,46,Wormadam,Bug,Grass,"1'08""",14,"When evolving, its body takes in surrounding materials. As a result, there are many body variations.",True,True
+414,47,Mothim,Bug,Flying,"2'11""",51,Tt burrows through the ground at a speed of 50 mph while feeding on large boulders.,True,True
+265,48,Wurmple,Bug,,"1'00""",7.9,"Often targeted by bird Pokémon, it desperately resists by releasing poison from its tail spikes.",True,True
+266,49,Silcoon,Bug,,"2'00""",22,,True,False
+267,50,Beautifly,Bug,Flying,"3'03""",62.6,"Despite its looks, it is aggressive. It jabs with its long, thin mouth if disturbed while collecting pollen.",True,True
+268,51,Cascoon,Bug,,"2'04""",25.4,"It never forgets any attack it endured while in the cocoon. After evolution, it seeks payback.",True,True
+269,52,Dustox,Bug,Poison,"3'11""",69.7,"Toxic powder is scattered with each flap. At night, it is known to strip leaves off trees lining boulevards.",True,True
+415,53,Combee,Bug,Flying,"1'00""",12,The trio is together from birth. It constantly gathers honey from flowers to please YESPTOUEN.,True,True
+416,54,Vespiquen,Bug,Flying,"3'11""",85,,,
+417,55,Pachirisu,Electric,,"1'04""",9,Al pair may be seen rubbing their cheek pouches together in an effort to share stored electricity.,True,True
+418,56,Buizel,Water,,"2'04""",65,It spins its two tails like a screw to propel itself through water. The tails also slice clinging seaweed.,True,True
+419,57,Floatzel,Water,,"3'07""",74,It is a common sight around fishing ports. It is known to rescue people and carry off prey.,True,True
+420,58,Cherubi,Grass,,"1'04""",7,,,
+421,59,Cherrim,Grass,,"1'08""",21,,True,False
+422,60,Shellos,Water,,"1'00""",14,"Beware of pushing strongly on its squishy body, as it makes a mysterious purple fluid ooze out.",True,True
+423,61,Gastrodon,Water,Ground,"2'11""",66,"Long ago, its entire back was shielded with a sturdy shell. There are traces of it left in its cells.",True,True
+214,62,Heracross,Bug,Fighting,"4'11""",119,"It loves sweet honey. To keep all the honey to itself, it hurls rivals away with its prized horn.",True,True
+190,63,Aipom,Normal,,"2'07""",25.4,It lives high among the treetops. It can use its tail as freely and cleverly as its hands.,True,True
+424,64,Ambipom,Normal,,"3'11""",45,,True,False
+425,65,Drifloon,Ghost,Flying,"1'04""",3,"Because of the way it floats aimlessly, an old folktale calls it a �Signpost for Wandering Spirits.�",True,True
+426,66,Drifblim,Ghost,Flying,"3'11""",33,,,
+427,67,Buneary,Normal,,"1'04""",12,Its ears are always rolled up. They can be forcefully extended to shatter even a large boulder.,True,True
+428,68,Lopunny,Normal,,"3'11""",73,"The ears appear to be delicate. If they are touched roughly, it kicks with its graceful legs.",True,True
+92,69,Gastly,Ghost,Poison,"4'03""",0.2,"Born from gases, anyone would faint if engulfed by its gaseous body, which contains poison.",True,True
+93,70,Haunter,Ghost,Poison,"5'03""",0.2,It likes to lurk in the dark and tap shoulders with a gaseous hand. Its touch causes endless shuddering.,True,True
+94,71,Gengar,Ghost,Poison,"4'11""",89.3,,,
+200,72,Misdreavus,Ghost,,"2'04""",2.2,A Pokémon that startles people in the middle of the night. It gathers fear as its energy.,True,True
+429,73,Mismagius,Ghost,,"2'11""",10,,,
+198,74,Murkrow,Dark,Flying,"1'08""",4.6,"If spotted, it will lure an unwary person into chasing it, then lose the pursuer on mountain trails.",True,True
+430,75,Honchkrow,Dark,Flying,"2'11""",60,,,
+431,76,Glameow,Normal,,"1'08""",9,It hides its spiteful tendency of hooking its claws into the nose of its Trainer if it isn�t fed.,True,True
+432,77,Purugly,Normal,,"3'03""",97,"It binds its body with its tails to make itself look bigger. If it locks ayes, it will glare ceaselessly.",True,True
+118,78,Goldeen,Water,,"2'00""",33.1,"Though it appears very elegant when swimming with fins unfurled, it can jab powerfully with its horn.",True,True
+119,79,Seaking,Water,,"4'03""",86,"In autumn, its body becomes more fatty in preparing to propose to a mate. It takes on beautiful colors.",True,True
+339,80,Barboach,Water,Ground,"1'04""",4.2,"Its slimy body is hard to grasp. In one region, it is said to have been born from hardened mud.",True,True
+340,81,Whiscash,Water,Ground,"2'11""",52,"It is extremely protective of its territory. If any foe approaches, it attacks using vicious tremors.",True,True
+433,82,Chingling,Psychic,,"0'08""",1,"There is an orb inside its mouth. When it hops, the orb bounces all over and makes a ringing sound.",True,True
+358,83,Chimecho,Psychic,,"2'00""",2.2,,,
+434,84,Stunky,Poison,Dark,"1'04""",42,"It sprays a foul fluid from its rear. Its stench spreads over a nile radius, driving Pokémon away.",True,True
+435,85,Skuntank,Poison,Dark,"3'03""",84,It attacks by spraying a horribly smelly fluid from the tip of its tail. Attacks from above confound it.,True,True
+307,86,Meditite,Fighting,Psychic,"2'00""",24.7,It always trains deep in mountains. It levitates when it heightens its spiritual power through meditation.,True,True
+308,87,Medicham,Fighting,Psychic,"4'03""",69.4,It gains the ability to see the aura of its opponents by honing its mind through starvation.,True,True
+436,88,Bronzor,Steel,Psychic,"1'08""",133,There are researchers who believe this Pokémon reflected like a mirror in the distant past.,True,True
+437,89,Bronzong,Steel,Psychic,"4'03""",412,,,
+77,90,Ponyta,Fire,,"3'03""",66.1,"As a newborn, it can barely stand. However, through galloping, its Jegs are made tougher and faster.",True,True
+78,91,Rapidash,Fire,,"5'07""",209.4,"When at an all-out gallop, its blazing mane sparkles, enhancing its beautiful appearance.",True,True
+438,92,Bonsly,Rock,,"1'08""",33,It prefers an arid atmosphere. It leaks water that looks like tears when adjusting its moisture level.,True,True
+185,93,Sudowoodo,Rock,,"3'11""",83.8,"To avoid being attacked, it does nothing but mimic a tree. It hates water and flees from rain.",True,True
+439,94,Mime Jr.,Psychic,Fairy,"2'00""",29,It mimics the expressions and motions of those it sees ta understand the feelings of others.,True,True
+122,95,Mr. Mime,Psychic,Fairy,"4'03""",120.2,It shapes an invisible wall in midair by minutely vibrating its fingertips to stop molecules in the air.,True,True
+440,96,Happiny,Normal,,"2'00""",54,,,
+113,97,Chansey,Normal,,"3'07""",76.3,A kindly Pokémon that lays highly nutritious eggs and shares them with injured Pokémon or people.,True,True
+242,98,Blissey,Normal,,"4'11""",103.2,,,
+173,99,Cleffa,Fairy,,"1'00""",6.6,It is often seen when shooting stars fill the night skies. It's said to arrive riding on a shooting star.,True,True
+35,100,Clefairy,Fairy,,"2'00""",16.5,It is said that happiness will come to those who see a gathering of CLEFAIRY dancing under a full moon.,True,True
+36,101,Clefable,Fairy,,"4'03""",88.2,,,
+441,102,Chatot,Normal,Flying,"1'08""",4,"Its tongue is just like a human's. As aresult, it can cleverly mimic human speech.",True,True
+172,103,Pichu,Electric,,"1'00""",4.4,"The electric sacs in its cheeks are small. If even a little electricity leaks, it becomes shocked.",True,True
+25,104,Pikachu,Electric,,"1'04""",13.2,It occasionally uses an electric shock to recharge 4 fellow PIKACHU that is in a weakened state.,True,True
+26,105,Raichu,Electric,,"2'07""",66.1,"Its tail discharges electricity into the ground, protecting it from getting shocked.",True,True
+163,106,Hoothoot,Normal,Flying,"2'04""",46.7,"It marks time precisely. Some countries consider it to be a wise friend, versed in the world's ways.",True,True
+164,107,Noctowl,Normal,Flying,"5'03""",89.9,Its ayes are specially developed to enable it to see clearly even in murky darkness and minimal light.,True,True
+442,108,Spiritomb,Ghost,Dark,"3'03""",238,,,
+443,109,Gible,Dragon,Ground,"2'04""",45,"It attacks using its huge mouth. While its attacks are powerful, it hurts itself out of clumsiness, too.",True,True
+444,110,Gabite,Dragon,Ground,"4'07""",124,It loves sparkly things. It seeks treasures in caves and hoards the loot in its nest.,True,True
+445,111,Garchomp,Dragon,Ground,"6'03""",209,,,
+446,112,Munchlax,Normal,,"2'00""",232,"In its desperation to gulp down food, it forgets about the food it has hidden under its fur.",True,True
+143,113,Snorlax,Normal,,"6'11""",1014.1,,,
+201,114,Unown,Psychic,,"1'08""",11,"When alone, nothing happens. However, if there are two or more, an odd power is said to emerge.",True,True
+447,115,Riolu,Fighting,,"2'04""",45,It has the peculiar power of being able to see emotions such as joy and rage in the form of waves.,True,True
+448,116,Lucario,Fighting,Steel,"3'11""",119,A well-trained one can sense auras to identify and take in the feelings of creatures over half a mile away.,True,True
+194,117,Wooper,Water,Ground,"1'04""",18.7,"When walking on land, it covers its body with a poisonous film that keeps its skin from dehydrating.",True,True
+195,118,Quagsire,Water,Ground,"4'07""",165.3,It has an easygoing nature. It doesn�t care if it bumps its head on boats and boulders while swimming.,True,True
+278,119,Wingull,Water,Flying,"2'00""",20.9,"It soars high in the sky, riding on updrafts like a glider. It carries food tucked in its bill.",True,True
+279,120,Pelipper,Water,Flying,"3'11""",61.7,"It is a messenger of the skies, carrying small Pokémon and eggs to safety in its bill.",True,True
+203,121,Girafarig,Normal,Psychic,"4'11""",91.5,The head on its tail contains a small brain. It can instinctively fight even while facing backward.,True,True
+449,122,Hippopotas,Ground,,"2'07""",109,It shuts its nostrils tight then travels through sand as if walking. They form colonies of around ten.,True,True
+450,123,Hippowdon,Ground,,"6'07""",661,,,
+298,124,Azurill,Normal,Fairy,"0'08""",4.4,,True,False
+183,125,Marill,Water,Fairy,"1'04""",18.7,The oil-filled end of its tail floats on water. It keeps MARILL from drowning even in a strong current.,True,True
+184,126,Azumarill,Water,Fairy,"2'07""",62.8,"It can spend all day in water, since it can inhale and store a large volume of air.",True,True
+451,127,Skorupi,Poison,Bug,"2'07""",27,"As soon as the tail claws close, its needle tips secrete poison. It can survive a year without food.",True,True
+452,128,Drapion,Poison,Dark,"4'03""",136,,,
+453,129,Croagunk,Poison,Fighting,"2'04""",51,"It rarely fights fairly, but that is strictly to ensure survival. It is popular as a mascot.",True,True
+454,130,Toxicroak,Poison,Fighting,"4'03""",98,"It has 4 poison sac at its throat. When it croaks, the stored poison is churned for greater potency.",True,True
+455,131,Carnivine,Grass,,"4'07""",60,It binds itself to trees in marshes. It attracts prey with its sweet- smelling drool and gulps them dawn.,True,True
+223,132,Remoraid,Water,,"2'00""",26.5,It forcefully squirts water. The water jet never misses prey even if the REMORAID is deep in the sea.,True,True
+224,133,Octillery,Water,,"2'11""",62.8,,,
+456,134,Finneon,Water,,"1'04""",15,The line running down its side can store sunlight. It shines vividly at night.,True,True
+457,135,Lumineon,Water,,"3'11""",53,,,
+72,136,Tentacool,Water,Poison,"2'11""",100.3,"Because its body is almost entirely composed of water, it shrivels up if it is washed ashore.",True,True
+73,137,Tentacruel,Water,Poison,"5'03""",121.3,,,
+349,138,Feebas,Water,,"2'00""",16.3,,,
+350,139,Milotic,Water,,"20'04""",357.1,,,
+458,140,Mantyke,Water,Flying,"3'03""",143,People organize tours to see this Pokémon frolic and skim the tops of waves with REMORAID.,True,True
+226,141,Mantine,Water,Flying,"6'11""",485,,,
+459,142,Snover,Grass,Ice,"3'03""",111,It skillfully controls the intensity of the fire on its tail to keep its foes at an ideal distance.,True,True
+460,143,Abomasnow,Grass,Ice,"7'03""",299,,,
+215,144,Sneasel,Dark,Ice,"2'11""",61.7,A smart and sneaky Pokémon. A pair may work together to steal eggs by having one lure the parents away.,True,True
+461,145,Weavile,Dark,Ice,"3'07""",75,,,
+480,146,Uxie,Psychic,,"1'00""",1,,,
+481,147,Mesprit,Psychic,,"1'00""",1,,,
+482,148,Azelf,Psychic,,"1'00""",1,,,
+483,149,Dialga,Steel,Dragon,"17'09""",1506,,,
+484,150,Palkia,Water,Dragon,"13'09""",741,,,
+490,151,Manaphy,Water,,"1'00""",3,,True,False
+479,152,Rotom,Electric,Ghost,"1'00""",1,Its electric-like body can enter some kinds of machines and take contral in order to make mischief.,True,True
+479,152,Rotom,Electric,Ghost,"1'00""",1,Its electric-like body can enter some kinds of machines and take contral in order to make mischief.,True,True
+479,152,Rotom,Electric,Ghost,"1'00""",1,Its electric-like body can enter some kinds of machines and take contral in order to make mischief.,True,True
+479,152,Rotom,Electric,Ghost,"1'00""",1,Its electric-like body can enter some kinds of machines and take contral in order to make mischief.,True,True
+479,152,Rotom,Electric,Ghost,"1'00""",1,Its electric-like body can enter some kinds of machines and take contral in order to make mischief.,True,True
+479,152,Rotom,Electric,Ghost,"1'00""",1,Its electric-like body can enter some kinds of machines and take contral in order to make mischief.,True,True
+207,153,Gligar,Ground,Flying,"3'07""",142.9,"It glides as if sliding. It startles foes by clamping on to their faces, then jabs with its poison stinger.",True,True
+472,154,Gliscor,Ground,Flying,"6'07""",94,,,
+299,155,Nosepass,Rock,,"3'03""",213.8,"When endangered, it may protect itself by raising its magnetism and draning iron objects to its body.",True,True
+476,156,Probopass,Rock,Steel,"4'07""",750,It freely controls three small units called Mini-Noses using magnetic force.,True,True
+280,157,Ralts,Psychic,Fairy,"1'04""",14.6,"If its horns capture the warm feelings of people or Pokémon, its body warms up slightly.",True,True
+281,158,Kirlia,Psychic,Fairy,"2'07""",44.5,"If its Trainer becomes happy, it overflows with energy, dancing joyously while spinning about.",True,True
+282,159,Gardevoir,Psychic,Fairy,"5'03""",106.7,,,
+475,160,Gallade,Psychic,Fighting,"5'03""",115,,,
+108,161,Lickitung,Normal,,"3'11""",144.4,"When it extends its over-six-foot- Jong tongue, its tail quivers. There is a possibility they are connected.",True,True
+463,162,Lickilicky,Normal,,"5'07""",309,,,
+133,163,Eevee,Normal,,"1'00""",14.3,"Because its genetic makeup is irregular, it quickly changes its form due to a variety of causes.",True,True
+134,164,Vaporeon,Water,,"3'03""",63.9,,True,False
+135,165,Jolteon,Electric,,"2'07""",54,"When exposed ta the moon's aura, the rings on its body glow faintly and it gains a mysterious power.",True,True
+136,166,Flareon,Fire,,"2'11""",55.1,"Inhaled air is heated in the flame sac in its body to an intense fire over 3,000 degrees Fahrenheit.",True,True
+196,167,Espeon,Psychic,,"2'11""",58.4,"Its fur is so sensitive, it can sense minute shifts in the air and predict the weather.",True,True
+197,168,Umbreon,Dark,,"3'03""",59.5,,,
+470,169,Leafeon,Grass,,"3'03""",56,"It basically does not fight. With cells similar to those of plants, it can perform photosynthesis.",True,True
+471,170,Glaceon,Ice,,"2'07""",57,"By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.",True,True
+333,171,Swablu,Normal,Flying,"1'04""",2.6,It can�t relax if it or its surroundings are not clean. Tt wipes of f dirt with its wings.,True,True
+334,172,Altaria,Dragon,Flying,"3'07""",45.4,,,
+175,173,Togepi,Fairy,,"1'00""",3.3,"It transforms the kindness and joy of others into happiness, which it stores in its shell.",True,True
+176,174,Togetic,Fairy,Flying,"2'00""",7.1,"To share its happiness, it flies around the world seeking kind- hearted people.",True,True
+468,175,Togekiss,Fairy,Flying,"4'11""",84,,,
+228,176,Houndour,Dark,Fire,"2'00""",23.8,It is smart enough to hunt in packs. It uses a variety of cries for communicating with others.,True,True
+229,177,Houndoom,Dark,Fire,"4'07""",77.2,,,
+81,178,Magnemite,Electric,Steel,"1'00""",13.2,"The faster the units at its sides rotate, the greater the magnetic force they generate.",True,True
+82,179,Magneton,Electric,Steel,"3'03""",132.3,,True,False
+462,180,Magnezone,Electric,Steel,"3'11""",397,,,
+114,181,Tangela,Grass,,"3'03""",77.2,The blue vines shrouding its body are covered in a growth of fine hair. It is known to be ticklish.,True,True
+465,182,Tangrowth,Grass,,"6'07""",284,,,
+193,183,Yanma,Bug,Flying,"3'11""",83.8,It can hover in one spot by flapping its wings at high speed. It flits about to guard its territory.,True,True
+469,184,Yanmega,Bug,Flying,"6'03""",114,,,
+357,185,Tropius,Grass,Flying,"6'07""",220.5,Delicious fruits grew out from around its neck because it always ate the same kind of fruit.,True,True
+111,186,Rhyhorn,Ground,Rock,"3'03""",253.5,"Its powerful tackles can destroy anything. However, it is too slow witted to help people work.",True,True
+112,187,Rhydon,Ground,Rock,"6'03""",264.6,,,
+464,188,Rhyperior,Ground,Rock,"7'10""",624,,,
+355,189,Duskull,Ghost,,"2'07""",33.1,It loves the crying of children. It startles bad kids by passing through walls and making them ery.,True,True
+356,190,Dusclops,Ghost,,"5'03""",67.5,It seeks drifting will-o'-the-wisps and sucks them into its empty body. What happens inside is a mystery.,True,True
+477,191,Dusknoir,Ghost,,"7'03""",235,,,
+137,192,Porygon,Normal,,"2'07""",80.5,Al man-made Pokémon created using advanced scientific means. It can move freely in cyberspace.,True,True
+233,193,Porygon2,Normal,,"2'00""",71.7,"It was upgraded to enable the exploration of other planets. However, it failed to measure up.",True,True
+474,194,Porygon-Z,Normal,,"2'11""",75,,,
+123,195,Scyther,Bug,Flying,"4'11""",123.5,The sharp seythes on its forearms become increasingly sharp by cutting through hard objects.,True,True
+212,196,Scizor,Bug,Steel,"5'11""",260.1,It raises its pincers with eyelike markings for intimidation. It alsa swings them down dangerously.,True,True
+239,197,Elekid,Electric,,"2'00""",51.8,A weak electric current flows between its horns. Sticking a hand there shocks the unwary.,True,True
+125,198,Electabuzz,Electric,,"3'07""",66.1,,True,False
+466,199,Electivire,Electric,,"5'11""",306,,,
+240,200,Magby,Fire,,"2'04""",47.2,"Its magma-like blood circulates throughout its body. Its body""s heat can top 1,100 degrees F.",True,True
+126,201,Magmar,Fire,,"4'03""",98.1,"When it breathes deeply, heat waves form around its body, making it hard to see clearly.",True,True
+467,202,Magmortar,Fire,,"5'03""",150,,,
+220,203,Swinub,Ice,Ground,"1'04""",14.3,"It has 4 very sensitive nose. It can locate mushrooms, berries, and even hot springs buried under ice.",True,True
+221,204,Piloswine,Ice,Ground,"3'07""",123,,True,False
+473,205,Mamoswine,Ice,Ground,"8'02""",642,,,
+361,206,Snorunt,Ice,,"2'04""",37,It is said that several SNORUNT gather under giant leaves and live together in harmony.,True,True
+362,207,Glalie,Ice,,"4'11""",565.5,,,
+478,208,Froslass,Ice,Ghost,"4'03""",59,,,
+359,209,Absol,Dark,,"3'11""",103.6,,,
+487,210,Giratina,Ghost,Dragon,"22'08""",1433,,,

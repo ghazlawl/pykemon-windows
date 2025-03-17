@@ -1,5 +1,5 @@
 from pynput.keyboard import Controller, Key
-from PIL import ImageOps
+from PIL import ImageEnhance, ImageOps
 import time
 
 from imports.screentail import Screentail
@@ -322,3 +322,120 @@ class Interface:
         is_registering = num_target_pixels > num_total_pixels * 0.6
 
         return is_registering
+
+    # ============================== #
+    # Pokedex Functions
+    # ============================== #
+
+    def extract_pokedex_is_caught(self):
+        # Take a screenshot of the message area.
+        screenshot = Screentail.get_screenshot(
+            self.my_emulator,
+            221,
+            47,
+            34,
+            34,
+            "extract-pokedex-is-caught.png",
+        )
+
+        is_scanning_image = True
+        num_total_pixels = 0
+        num_non_yellow_pixels = 0
+
+        # Loop through all pixels in the image.
+        for x in range(screenshot.width):
+            if not is_scanning_image:
+                break
+
+            for y in range(screenshot.height):
+                if not is_scanning_image:
+                    break
+
+                # Get the RGB value of the pixel.
+                pixel_color = screenshot.getpixel((x, y))
+
+                # TODO: Refactor this to support other color schemes.
+                if pixel_color != (255, 255, 199) and pixel_color != (255, 239, 182):
+                    num_non_yellow_pixels += 1
+
+                num_total_pixels += 1
+
+        # Assume the pokémon is caught if the # of non-yellow pixels is greater than 60%.
+        is_caught = num_non_yellow_pixels > num_total_pixels * 0.6
+
+        return is_caught
+
+    def extract_pokedex_description(self):
+        # Take a screenshot of the description area.
+        screenshot = Screentail.get_screenshot(
+            self.my_emulator, 60, 272, 395, 95, "extract-pokedex-description.png"
+        )
+
+        # Convert image to grayscale.
+        screenshot = screenshot.convert("L")
+
+        # Extract the text.
+        text = utils.get_ocr_text(screenshot)
+        text = text.replace("\n", " ")
+
+        return text
+
+    def extract_pokedex_name(self):
+        # Take a screenshot of the name area.
+        screenshot = Screentail.get_screenshot(
+            self.my_emulator, 310, 50, 200, 30, "extract-pokedex-name.png"
+        )
+
+        # Convert image to grayscale.
+        screenshot = screenshot.convert("L")
+
+        # Resize the image.
+        width, height = screenshot.size
+        screenshot = screenshot.resize((int(width * 1), int(height * 0.8)))
+
+        # "Enhance... enhance... Keep going... okay, stop!"
+        enhancer = ImageEnhance.Brightness(screenshot)
+        screenshot = enhancer.enhance(1.2)
+        enhancer = ImageEnhance.Contrast(screenshot)
+        screenshot = enhancer.enhance(2.0)
+        enhancer = ImageEnhance.Sharpness(screenshot)
+        screenshot = enhancer.enhance(2.0)
+        screenshot.save("pillow/extract-pokedex-name-enhanced.png")
+
+        # Extract the name.
+        name_text = utils.get_ocr_text(screenshot)
+        name_text = name_text.strip()
+
+        return name_text
+
+    def extract_pokedex_number(self):
+        # Take a screenshot of the number area.
+        screenshot = Screentail.get_screenshot(
+            self.my_emulator, 260, 50, 50, 28, "extract-pokedex-number.png"
+        )
+
+        # Convert image to grayscale.
+        screenshot = screenshot.convert("L")
+
+        # Resize the image.
+        width, height = screenshot.size
+        screenshot = screenshot.resize((int(width * 1), int(height * 0.8)))
+
+        # "Enhance... enhance... Keep going... okay, stop!"
+        enhancer = ImageEnhance.Brightness(screenshot)
+        screenshot = enhancer.enhance(1.2)
+        enhancer = ImageEnhance.Contrast(screenshot)
+        screenshot = enhancer.enhance(2.0)
+        enhancer = ImageEnhance.Sharpness(screenshot)
+        screenshot = enhancer.enhance(2.0)
+        screenshot.save("pillow/extract-pokedex-number-enhanced.png")
+
+        # Extract the number.
+        number_text = utils.get_ocr_numbers(screenshot)
+
+        if number_text:
+            # Remove leading zeros, if any.
+            number = int(number_text)
+            return number
+
+        return -1
