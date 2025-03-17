@@ -44,6 +44,7 @@ class Emulator:
         """
 
         self.emulator_window.activate()
+        self.update_vars()
 
     def update_vars(self):
         """

@@ -64,6 +64,8 @@ def do_battle():
     is_battling = True
 
     while is_battling:
+        my_emulator.activate_window()
+
         if not my_interface.check_is_battling():
             print("The battle appears to have ended.")
             is_battling = False
@@ -111,6 +113,8 @@ def do_fishing():
     is_fishing = True
 
     while is_fishing:
+        my_emulator.activate_window()
+
         print("Using fishing rod...")
         my_interface.do_long_press("a", 0.5)
 
@@ -178,6 +182,8 @@ def do_patrol():
     is_patrolling = True
 
     while is_patrolling:
+        my_emulator.activate_window()
+
         # Get the battle text.
         battle_text = my_interface.get_message_text(custom_width=95, custom_height=35)
 
@@ -197,11 +203,14 @@ def do_patrol():
 
 
 def do_update_pokedex():
+
     print("Starting update...")
 
     is_updating = True
 
     while is_updating:
+        my_emulator.activate_window()
+
         # Step 1: Extract the name.
         name = my_interface.extract_pokedex_name()
         print("Name:", name)
