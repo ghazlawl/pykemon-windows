@@ -2,12 +2,13 @@ import pygetwindow as gw
 
 
 class Emulator:
-    emulator_window = None
-    emulator_dimensions = (0, 0)
-    emulator_position = (0, 0)
     emulator_menu_height = 80
 
-    screen_dimensions = (0, 0)
+    # emulator_window = None
+    # emulator_dimensions = (0, 0)
+    # emulator_position = (0, 0)
+
+    # screen_dimensions = (0, 0)
 
     def __init__(self):
         self.emulator_window = self.get_window()

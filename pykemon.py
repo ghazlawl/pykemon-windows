@@ -6,7 +6,6 @@ from imports.emulator import Emulator
 from imports.interface import Interface
 from imports.pokedex import Pokedex
 from imports.screentail import Screentail
-import imports.utils as utils
 
 my_emulator = Emulator()
 my_interface = Interface(my_emulator)
@@ -47,19 +46,28 @@ def do_throw_pokeball(self):
     my_interface.do_long_press("x", 0.5)
 
 
-def do_battle():
+def do_identify_pokemon():
     """
-    Tells the character to start battling.
+    Identifies the pokemon that is currently being battled.
     """
 
-    print("Preparing for battle...")
-    print("Searching pokedex...")
+    print("Identifying pokémon...")
 
     pokemon_name = my_interface.get_pokemon_name()
     pokedex_entry = my_pokedex.get_pokemon_entry_fuzzy(pokemon_name)
 
     if pokedex_entry:
         my_pokedex.print_pokemon_card(pokedex_entry)
+
+
+def do_battle():
+    """
+    Tells the character to start battling.
+    """
+
+    print("Preparing for battle...")
+
+    do_identify_pokemon()
 
     is_battling = True
 
@@ -203,6 +211,10 @@ def do_patrol():
 
 
 def do_update_pokedex():
+    """
+    Updates the pokedex CSV file to record Pokemon that have been seen and/or
+    caught. Also updates descriptions if they missing from the pokedex.
+    """
 
     print("Starting update...")
 
@@ -302,6 +314,9 @@ if len(sys.argv) > 1:
 
     if first_arg == "battle":
         do_battle()
+
+    if first_arg == "identify":
+        do_identify_pokemon()
 
     if first_arg == "patrol":
         do_patrol()
